@@ -9,5 +9,5 @@
 import Foundation
 
 struct NSGameInfo {
-	
+	var score = 0
 }
