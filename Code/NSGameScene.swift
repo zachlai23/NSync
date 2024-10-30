@@ -57,11 +57,14 @@ class NSGameScene: SKScene {
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		run(SKAction.playSoundFileNamed("Tap Noise", waitForCompletion: false))
-		
+		guard let touch = touches.first else { return }
 		if context?.stateMachine?.currentState is NSStartState {
 			backgroundColor = .gray
 			context?.stateMachine?.enter(NSPlayingState.self)
+		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
+			playingState.handleTap(touch)
+
+			run(SKAction.playSoundFileNamed("Tap Noise", waitForCompletion: false))
 		}
 	}
 	
