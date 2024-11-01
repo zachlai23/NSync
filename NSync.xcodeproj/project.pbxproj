@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF767CAC2CD3607400019BE2 /* NSAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */; };
+		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
+		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
+		EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB32CD3CDB100019BE2 /* AudioKitEX */; };
+		EF767CB72CD3CFF700019BE2 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB62CD3CFF700019BE2 /* SoundpipeAudioKit */; };
 		EF83D2C82CC9D14000ED75BF /* NSGameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */; };
 		EF83D2CA2CC9D17700ED75BF /* NSLayoutInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */; };
 		EF83D2CC2CC9D1BF00ED75BF /* NSGameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */; };
@@ -41,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAudioManager.swift; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
 		EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameContext.swift; sourceTree = "<group>"; };
@@ -83,6 +89,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */,
+				EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */,
+				EF767CB72CD3CFF700019BE2 /* SoundpipeAudioKit in Frameworks */,
+				EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +179,7 @@
 				EF83D2C32CC9D0F400ED75BF /* States */,
 				EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */,
 				EF83D2CD2CC9D22300ED75BF /* NSGameScene.swift */,
+				EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -221,6 +232,10 @@
 			);
 			name = NSync;
 			packageProductDependencies = (
+				EF767CAE2CD364AD00019BE2 /* AudioKit */,
+				EF767CB02CD364E000019BE2 /* AudioKit */,
+				EF767CB32CD3CDB100019BE2 /* AudioKitEX */,
+				EF767CB62CD3CFF700019BE2 /* SoundpipeAudioKit */,
 			);
 			productName = NSync;
 			productReference = EFC914962CC87868001CAA28 /* NSync.app */;
@@ -304,6 +319,11 @@
 			);
 			mainGroup = EFC9148D2CC87868001CAA28;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF767CAD2CD3640400019BE2 /* XCRemoteSwiftPackageReference "AudioKit" */,
+				EF767CB22CD3CDB100019BE2 /* XCRemoteSwiftPackageReference "AudioKitEX" */,
+				EF767CB52CD3CFF700019BE2 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EFC914972CC87868001CAA28 /* Products */;
 			projectDirPath = "";
@@ -359,6 +379,7 @@
 				EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */,
 				EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */,
 				EF83D2CE2CC9D22300ED75BF /* NSGameScene.swift in Sources */,
+				EF767CAC2CD3607400019BE2 /* NSAudioManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +696,54 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF767CAD2CD3640400019BE2 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.4;
+			};
+		};
+		EF767CB22CD3CDB100019BE2 /* XCRemoteSwiftPackageReference "AudioKitEX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKitEX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		EF767CB52CD3CFF700019BE2 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/SoundpipeAudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF767CAE2CD364AD00019BE2 /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AudioKit;
+		};
+		EF767CB02CD364E000019BE2 /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AudioKit;
+		};
+		EF767CB32CD3CDB100019BE2 /* AudioKitEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF767CB22CD3CDB100019BE2 /* XCRemoteSwiftPackageReference "AudioKitEX" */;
+			productName = AudioKitEX;
+		};
+		EF767CB62CD3CFF700019BE2 /* SoundpipeAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF767CB52CD3CFF700019BE2 /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
+			productName = SoundpipeAudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EFC9148E2CC87868001CAA28 /* Project object */;
 }

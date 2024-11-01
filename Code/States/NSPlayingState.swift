@@ -13,8 +13,6 @@ class NSPlayingState: GKState {
 	unowned let scene: NSGameScene
 	unowned let context: NSGameContext
 	
-	var song: AVAudioPlayer?
-	
 	init(scene: NSGameScene, context: NSGameContext) {
 		self.scene = scene
 		self.context = context
@@ -29,36 +27,15 @@ class NSPlayingState: GKState {
 		print("Entered Playing State.")
 		scene.removeAllChildren()
 		scene.showPlayingScreen()
-		playSong()
+		
+		scene.audioManager.startBeatDetection()
 	}
 	
 	func handleTap(_ touch: UITouch) {
-		print("Touches received in PlayingState.")
+		guard let audioManager = scene.audioManager else { return }
+		let tapTime = audioManager.audioPlayer.currentTime
 		
-		let tapTime = song?.currentTime
-		print(tapTime ?? "No tap time.")
+		scene.audioManager.matchingBeat(tapTime: tapTime)
 	}
-	
-//	func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent? ) {
-//		print("Touches received in PlayingState.") 
-//		
-//		let tapTime = song?.currentTime
-//		print(tapTime ?? "No tap time.")
-//	}
-	
-	func playSong() {
-		guard let musicURL = Bundle.main.url(forResource: "NSyncAudio1", withExtension: "mp3") else {
-			return
-		}
-		do {
-			song = try! AVAudioPlayer(contentsOf: musicURL)
-			song?.play()
-		}
-	}
-
-
-	
-	
-	
 	
 }
