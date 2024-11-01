@@ -12,7 +12,7 @@ import AVFoundation
 class NSPlayingState: GKState {
 	unowned let scene: NSGameScene
 	unowned let context: NSGameContext
-	
+		
 	init(scene: NSGameScene, context: NSGameContext) {
 		self.scene = scene
 		self.context = context

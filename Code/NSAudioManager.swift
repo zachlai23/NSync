@@ -7,6 +7,7 @@
 //  AudioManager class for analyzing songs
 
 import AudioKit
+import SpriteKit
 import Foundation
 
 class AudioManager: ObservableObject {
@@ -14,10 +15,16 @@ class AudioManager: ObservableObject {
 	var frequencyTracker: FFTTap!
 	let engine = AudioEngine()
 	
-	var beatTimestamps: [Double] = []	// Store timestamps
+	var beatTimestamps: [Double] = []
 	var lastBeat: Double = 0
 	var lastTap: Double = 0.0
 	var lastCheckedTime: Double = 0.0
+	
+	var scene: NSGameScene?
+	
+	init(scene: NSGameScene?) {
+		self.scene = scene
+	}
 	
 	// Loads audio file
 	func loadAudioFile(url: URL) {
@@ -54,13 +61,12 @@ class AudioManager: ObservableObject {
 	private func analyzeData(_ fftData: [Float]) {
 		let currentTime = audioPlayer.currentTime
 		
-		// Calculate the energy of the FFT data
 		let energy = fftData.map { $0 * $0 }.reduce(0, +)
 
-		// Check for significant beats based on energy
-		if energy > 1.95 && currentTime - lastBeat > 0.5 {
+		if energy > 2.25 && currentTime - lastBeat > 0.5 {
 			lastBeat = currentTime
 			beatTimestamps.append(currentTime)
+			self.scene?.drawBeatDot()
 		}
 	}
 	
@@ -70,16 +76,16 @@ class AudioManager: ObservableObject {
 		
 		for beat in beatTimestamps {
 			let accuracy = abs(tapTime - beat)
-			if accuracy <= 0.4 &&  accuracy > 0.25{
-				print("Good.")
+			if accuracy <= 0.25{
+				scene?.showFeedback(forAccuracy: "Perfect!")
 				return
 			}
-			else if accuracy <= 0.25{
-				print("Perfect!")
+			else if accuracy <= 0.5{
+				scene?.showFeedback(forAccuracy: "Good")
 				return
 			}
 		}
-		print("Fail")
+		scene?.showFeedback(forAccuracy: "Fail")
 	}
 	
 	// Check if user did not tap to a valid beat

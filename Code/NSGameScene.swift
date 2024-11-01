@@ -15,6 +15,9 @@ class NSGameScene: SKScene {
 	
 	var audioManager: AudioManager!
 	
+	var feedbackLabel: SKLabelNode!
+	var dot: SKShapeNode!
+	
 	private var lastUpdateTime: TimeInterval = 0
 	
 	init(context: NSGameContext, size: CGSize) {
@@ -29,7 +32,7 @@ class NSGameScene: SKScene {
 	override func didMove(to view: SKView) {
 		guard let context else { return }
 		
-		audioManager = AudioManager()
+		audioManager = AudioManager(scene: self)
 		
 		prepareGameContext()
 		
@@ -85,8 +88,48 @@ class NSGameScene: SKScene {
 	func showPlayingScreen() {
 		childNode(withName: "title")?.removeFromParent()
 		let title = SKLabelNode(text: "Tap to the beat.")
-		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		title.position = CGPoint(x: size.width / 2, y: size.height * (2.0 / 3))
 		addChild(title)
+	}
+	
+	func showFeedback(forAccuracy accuracy: String) {
+		feedbackLabel = SKLabelNode()
+		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+		feedbackLabel.fontSize = 40
+		if (accuracy == "Perfect!") {
+			feedbackLabel.fontColor = .green
+		}
+		else if (accuracy == "Good") {
+			feedbackLabel.fontColor = .yellow
+		}
+		else {
+			feedbackLabel.fontColor = .red
+		}
+		feedbackLabel.text = accuracy
+		addChild(feedbackLabel)
+		
+
+		let fadeOut = SKAction.sequence([
+			SKAction.fadeOut(withDuration: 0.5),
+			SKAction.removeFromParent()
+		])
+		
+		feedbackLabel.run(fadeOut)
+	}
+	
+	func drawBeatDot() {
+		dot = SKShapeNode(circleOfRadius: 15)
+		dot.fillColor = .blue
+		dot.position = CGPoint(x: size.width / 2, y: size.height / 3)
+		addChild(dot)
+		
+		let fadeOut = SKAction.sequence([
+			SKAction.fadeOut(withDuration: 0.5),
+			SKAction.removeFromParent()
+		])
+		
+		dot.run(fadeOut)
+		
 	}
 	
 	func prepareGameContext() {
