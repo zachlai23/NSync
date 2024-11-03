@@ -8,6 +8,8 @@
 // Contains/references score game logic
 
 import SpriteKit
+import AVFoundation
+import AudioKit
 
 class NSGameScene: SKScene {
 	
@@ -17,6 +19,7 @@ class NSGameScene: SKScene {
 	
 	var feedbackLabel: SKLabelNode!
 	var dot: SKShapeNode!
+	var line:SKShapeNode!
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
@@ -62,9 +65,17 @@ class NSGameScene: SKScene {
 		context?.stateMachine?.update(deltaTime: deltaTime)
 		
 		
-		let playerTime = audioManager.audioPlayer.currentTime
+//		let playerTime = audioManager.audioPlayer.currentTime
 			
 //		audioManager.checkMissedBeat(currentTime: playerTime)
+	}
+	
+	func setupLine() {
+		line = SKShapeNode()
+		line.path = CGPath(rect: CGRect(x: frame.midX - 2, y: 0, width: 4, height: frame.height), transform: nil)
+		line.fillColor = .red
+		line.strokeColor = .red
+		addChild(line)
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -90,6 +101,12 @@ class NSGameScene: SKScene {
 		let title = SKLabelNode(text: "Tap to the beat.")
 		title.position = CGPoint(x: size.width / 2, y: size.height * (2.0 / 3))
 		addChild(title)
+		
+		line = SKShapeNode()
+		line.path = CGPath(rect: CGRect(x: frame.midX - 2, y: 0, width: 4, height: frame.height), transform: nil)
+		line.fillColor = .red
+		line.strokeColor = .red
+		addChild(line)
 	}
 	
 	func showFeedback(forAccuracy accuracy: String) {

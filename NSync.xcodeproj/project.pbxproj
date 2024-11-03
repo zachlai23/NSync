@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF428FB22CD74F9A0025F13C /* song1Beats.csv */; };
+		EF64FB0A2CD4BA48005D0E8A /* NSyncAudio2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */; };
 		EF767CAC2CD3607400019BE2 /* NSAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
 		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF428FB22CD74F9A0025F13C /* song1Beats.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = song1Beats.csv; sourceTree = "<group>"; };
+		EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio2.mp3; sourceTree = "<group>"; };
 		EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAudioManager.swift; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
@@ -206,8 +210,10 @@
 		EFF5C06D2CD0CAA900F3866E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				EF428FB22CD74F9A0025F13C /* song1Beats.csv */,
 				EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */,
 				EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */,
+				EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -343,7 +349,9 @@
 			files = (
 				EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */,
 				EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */,
+				EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
+				EF64FB0A2CD4BA48005D0E8A /* NSyncAudio2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
