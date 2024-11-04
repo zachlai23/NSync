@@ -16,7 +16,7 @@ class NSGameContext: GameContext {
 		scene as? NSGameScene
 	}
 	let gameMode: GameModeType
-	let gameInfo: NSGameInfo
+	var gameInfo: NSGameInfo
 	var layoutInfo: NSLayoutInfo = .init(screenSize: .zero)
 	
 	private(set) var stateMachine: GKStateMachine?

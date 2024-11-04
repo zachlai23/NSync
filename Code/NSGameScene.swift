@@ -18,6 +18,8 @@ class NSGameScene: SKScene {
 	var feedbackLabel: SKLabelNode!
 	var line: SKShapeNode!
 	var ball: SKShapeNode!
+
+	var scoreNode = NSScoreNode()
 	
 	var audioPlayer: AVAudioPlayer!
 	
@@ -78,10 +80,14 @@ class NSGameScene: SKScene {
 			let accuracy = abs(tapTime - beat)
 			if accuracy <= 0.02{
 				showFeedback(forAccuracy: "Perfect!")
+				context?.gameInfo.score += 10
+				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
 				return
 			}
 			else if accuracy <= 0.25{
 				showFeedback(forAccuracy: "Good")
+				context?.gameInfo.score += 5
+				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
 				return
 			}
 		}
@@ -148,12 +154,24 @@ class NSGameScene: SKScene {
 		
 		// Add line and balls and begin audio
 		title.run(sequence) {
+			self.scoreNode.setup(in: self.frame)
+			self.addChild(self.scoreNode)
+			
 			self.line = SKShapeNode()
-			self.line.path = CGPath(rect: CGRect(x: self.frame.midX - 2, y: 0, width: 4, height: self.frame.height), transform: nil)
+			self.line = SKShapeNode()
+			let lineStartY = self.frame.height * (3.0 / 5.0)
+			let linePath = CGMutablePath()
+			linePath.move(to: CGPoint(x: self.frame.midX, y: lineStartY))
+			linePath.addLine(to: CGPoint(x: self.frame.midX, y: 0))
+			
+			self.line.path = linePath
 			self.line.fillColor = .red
 			self.line.strokeColor = .red
 			self.addChild(self.line)
+			
 			self.spawnBalls()
+			
+			
 			
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
 				playingState.playAudio(fileName: "NSyncAudio1")
