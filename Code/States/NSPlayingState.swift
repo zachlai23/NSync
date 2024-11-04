@@ -12,6 +12,8 @@ import AVFoundation
 class NSPlayingState: GKState {
 	unowned let scene: NSGameScene
 	unowned let context: NSGameContext
+	
+	var audioPlayer: AVAudioPlayer?
 		
 	init(scene: NSGameScene, context: NSGameContext) {
 		self.scene = scene
@@ -28,14 +30,30 @@ class NSPlayingState: GKState {
 		scene.removeAllChildren()
 		scene.showPlayingScreen()
 		
-		scene.audioManager.startBeatDetection()
+		scene.loadBeatTimestamps(from: "song1Beats")
+		playAudio(fileName: "NSyncAudio1")
+		
 	}
 	
 	func handleTap(_ touch: UITouch) {
-		guard let audioManager = scene.audioManager else { return }
-		let tapTime = audioManager.audioPlayer.currentTime
+		let tapTime = audioPlayer?.currentTime
+//		print("Current tap time: \(tapTime)")
 		
-		scene.audioManager.matchingBeat(tapTime: tapTime)
+		scene.matchingBeat(tapTime: tapTime ?? 0.0)
+	}
+	
+	private func playAudio(fileName: String) {
+		guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+			print("Audio file not found")
+			return
+		}
+		
+		do {
+			audioPlayer = try AVAudioPlayer(contentsOf: url)
+			audioPlayer?.play()
+		} catch {
+			print("Error playing audio file: \(error)")
+		}
 	}
 	
 }

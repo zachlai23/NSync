@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF428FB22CD74F9A0025F13C /* song1Beats.csv */; };
 		EF64FB0A2CD4BA48005D0E8A /* NSyncAudio2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */; };
-		EF767CAC2CD3607400019BE2 /* NSAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
 		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
 		EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB32CD3CDB100019BE2 /* AudioKitEX */; };
@@ -50,7 +49,6 @@
 /* Begin PBXFileReference section */
 		EF428FB22CD74F9A0025F13C /* song1Beats.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = song1Beats.csv; sourceTree = "<group>"; };
 		EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio2.mp3; sourceTree = "<group>"; };
-		EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAudioManager.swift; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
 		EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameContext.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				EF83D2C32CC9D0F400ED75BF /* States */,
 				EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */,
 				EF83D2CD2CC9D22300ED75BF /* NSGameScene.swift */,
-				EF767CAB2CD3607400019BE2 /* NSAudioManager.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 				EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */,
 				EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */,
 				EF83D2CE2CC9D22300ED75BF /* NSGameScene.swift in Sources */,
-				EF767CAC2CD3607400019BE2 /* NSAudioManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,17 +9,22 @@
 
 import SpriteKit
 import AVFoundation
-import AudioKit
 
 class NSGameScene: SKScene {
 	
 	weak var context: NSGameContext?
 	
-	var audioManager: AudioManager!
 	
 	var feedbackLabel: SKLabelNode!
 	var dot: SKShapeNode!
 	var line:SKShapeNode!
+	
+	var audioPlayer: AVAudioPlayer!
+	
+	var beatTimestamps: [Double] = []
+	var lastBeat: Double = 0
+	var lastTap: Double = 0.0
+	var lastCheckedTime: Double = 0.0
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
@@ -34,20 +39,14 @@ class NSGameScene: SKScene {
 	
 	override func didMove(to view: SKView) {
 		guard let context else { return }
-		
-		audioManager = AudioManager(scene: self)
-		
+				
 		prepareGameContext()
+		
+		
 		
 		backgroundColor = .blue
 		context.stateMachine?.enter(NSStartState.self)
 		context.layoutInfo = NSLayoutInfo(screenSize: size)
-		
-		if let audioFileURL = Bundle.main.url(forResource: "NSyncAudio1", withExtension: "mp3") {
-			audioManager.loadAudioFile(url: audioFileURL)
-		} else {
-			print("Audio file not found.")
-		}
 		
 	}
 
@@ -57,6 +56,56 @@ class NSGameScene: SKScene {
 
 	func handleGameOver() {
 		context?.stateMachine?.enter(NSGameOverState.self)
+	}
+	
+	func loadBeatTimestamps(from fileName: String) {
+		guard let url = Bundle.main.url(forResource: fileName, withExtension: "csv") else {
+			print("File not found")
+			return
+		}
+		
+		do {
+			let data = try String(contentsOf: url)
+			let lines = data.components(separatedBy: .newlines)
+			
+			// Assuming the CSV contains timestamps in the first column
+			for line in lines {
+				// Split the line by comma and take the first element
+				let columns = line.split(separator: ",")
+				if let firstColumn = columns.first,
+				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
+					beatTimestamps.append(timestamp)
+				}
+			}
+		} catch {
+			print("Error reading CSV file: \(error)")
+		}
+	}
+	
+	// Compare user tap to beat timestamp, output feedback
+	func matchingBeat(tapTime: Double) {
+		lastTap = tapTime
+		print("User Tap Time: \(tapTime)")
+		for beat in beatTimestamps {
+			let accuracy = abs(tapTime - beat)
+			if accuracy <= 0.1{
+				showFeedback(forAccuracy: "Perfect!")
+				return
+			}
+			else if accuracy <= 0.25{
+				showFeedback(forAccuracy: "Good")
+				return
+			}
+		}
+		showFeedback(forAccuracy: "Fail")
+	}
+	
+	// Check if user did not tap to a valid beat
+	func checkMissedBeat(currentTime: Double) {
+		if currentTime - lastBeat > 0.5 && lastBeat > lastTap {
+			print("Fail - Missed a beat at \(lastBeat) seconds.")
+			lastCheckedTime = currentTime
+		}
 	}
 
 	override func update(_ currentTime: TimeInterval) {
