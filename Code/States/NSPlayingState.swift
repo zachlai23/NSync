@@ -28,21 +28,16 @@ class NSPlayingState: GKState {
 	override func didEnter(from previousState: GKState?) {
 		print("Entered Playing State.")
 		scene.removeAllChildren()
-		scene.showPlayingScreen()
-		
-		scene.loadBeatTimestamps(from: "song1Beats")
-		playAudio(fileName: "NSyncAudio1")
-		
+		self.scene.loadBeatTimestamps(from: "song1Beats")
+		self.scene.showPlayingScreen()
 	}
 	
 	func handleTap(_ touch: UITouch) {
-		let tapTime = audioPlayer?.currentTime
-//		print("Current tap time: \(tapTime)")
-		
+		let tapTime = audioPlayer?.currentTime		
 		scene.matchingBeat(tapTime: tapTime ?? 0.0)
 	}
 	
-	private func playAudio(fileName: String) {
+	func playAudio(fileName: String) {
 		guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
 			print("Audio file not found")
 			return

@@ -16,8 +16,8 @@ class NSGameScene: SKScene {
 	
 	
 	var feedbackLabel: SKLabelNode!
-	var dot: SKShapeNode!
-	var line:SKShapeNode!
+	var line: SKShapeNode!
+	var ball: SKShapeNode!
 	
 	var audioPlayer: AVAudioPlayer!
 	
@@ -42,22 +42,12 @@ class NSGameScene: SKScene {
 				
 		prepareGameContext()
 		
-		
-		
 		backgroundColor = .blue
 		context.stateMachine?.enter(NSStartState.self)
 		context.layoutInfo = NSLayoutInfo(screenSize: size)
-		
-	}
-
-	func handleGameStart() {
-		context?.stateMachine?.enter(NSPlayingState.self)
-	}
-
-	func handleGameOver() {
-		context?.stateMachine?.enter(NSGameOverState.self)
 	}
 	
+	// Load timestamps from a csv to an array
 	func loadBeatTimestamps(from fileName: String) {
 		guard let url = Bundle.main.url(forResource: fileName, withExtension: "csv") else {
 			print("File not found")
@@ -68,9 +58,8 @@ class NSGameScene: SKScene {
 			let data = try String(contentsOf: url)
 			let lines = data.components(separatedBy: .newlines)
 			
-			// Assuming the CSV contains timestamps in the first column
+			// take the first value(timestamp) from each row and add to beatTimestamps array
 			for line in lines {
-				// Split the line by comma and take the first element
 				let columns = line.split(separator: ",")
 				if let firstColumn = columns.first,
 				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
@@ -85,10 +74,9 @@ class NSGameScene: SKScene {
 	// Compare user tap to beat timestamp, output feedback
 	func matchingBeat(tapTime: Double) {
 		lastTap = tapTime
-		print("User Tap Time: \(tapTime)")
 		for beat in beatTimestamps {
 			let accuracy = abs(tapTime - beat)
-			if accuracy <= 0.1{
+			if accuracy <= 0.02{
 				showFeedback(forAccuracy: "Perfect!")
 				return
 			}
@@ -119,19 +107,13 @@ class NSGameScene: SKScene {
 //		audioManager.checkMissedBeat(currentTime: playerTime)
 	}
 	
-	func setupLine() {
-		line = SKShapeNode()
-		line.path = CGPath(rect: CGRect(x: frame.midX - 2, y: 0, width: 4, height: frame.height), transform: nil)
-		line.fillColor = .red
-		line.strokeColor = .red
-		addChild(line)
-	}
-	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
+		// If tap in start state, move to playing state
 		if context?.stateMachine?.currentState is NSStartState {
 			backgroundColor = .gray
 			context?.stateMachine?.enter(NSPlayingState.self)
+		// If tap in playing state, handle tap and play sound effect
 		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
 			playingState.handleTap(touch)
 
@@ -139,6 +121,7 @@ class NSGameScene: SKScene {
 		}
 	}
 	
+	// Start Screen: Gray screen with title
 	func showStartScreen() {
 		let title = SKLabelNode(text: "NSync")
 		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -147,17 +130,38 @@ class NSGameScene: SKScene {
 	
 	func showPlayingScreen() {
 		childNode(withName: "title")?.removeFromParent()
+		
+		// Show instructions for 1 second
 		let title = SKLabelNode(text: "Tap to the beat.")
+		title.name = "title"
 		title.position = CGPoint(x: size.width / 2, y: size.height * (2.0 / 3))
 		addChild(title)
+
+		let waitAction = SKAction.wait(forDuration: 1.0)
+		let fadeOutAction = SKAction.fadeOut(withDuration: 1.0)
+
+		let removeAction = SKAction.run {
+			title.removeFromParent()
+		}
+
+		let sequence = SKAction.sequence([waitAction, fadeOutAction, removeAction])
 		
-		line = SKShapeNode()
-		line.path = CGPath(rect: CGRect(x: frame.midX - 2, y: 0, width: 4, height: frame.height), transform: nil)
-		line.fillColor = .red
-		line.strokeColor = .red
-		addChild(line)
+		// Add line and balls and begin audio
+		title.run(sequence) {
+			self.line = SKShapeNode()
+			self.line.path = CGPath(rect: CGRect(x: self.frame.midX - 2, y: 0, width: 4, height: self.frame.height), transform: nil)
+			self.line.fillColor = .red
+			self.line.strokeColor = .red
+			self.addChild(self.line)
+			self.spawnBalls()
+			
+			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
+				playingState.playAudio(fileName: "NSyncAudio1")
+			}
+		}
 	}
 	
+	// Output feedback based on accuracy of tap
 	func showFeedback(forAccuracy accuracy: String) {
 		feedbackLabel = SKLabelNode()
 		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
@@ -183,21 +187,25 @@ class NSGameScene: SKScene {
 		feedbackLabel.run(fadeOut)
 	}
 	
-	func drawBeatDot() {
-		dot = SKShapeNode(circleOfRadius: 15)
-		dot.fillColor = .blue
-		dot.position = CGPoint(x: size.width / 2, y: size.height / 3)
-		addChild(dot)
-		
-		let fadeOut = SKAction.sequence([
-			SKAction.fadeOut(withDuration: 0.5),
-			SKAction.removeFromParent()
-		])
-		
-		dot.run(fadeOut)
-		
+	// Blue balls moving horizontally, passing the middle of the screen at each beat to tap to
+	func spawnBalls() {
+		for timestamp in beatTimestamps {
+			let ball = SKShapeNode(circleOfRadius: 15)
+			ball.fillColor = .blue
+			ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
+			self.addChild(ball)
+			
+			let delay = timestamp - 1.15
+			
+			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: 2.3)
+			
+			let waitAction = SKAction.wait(forDuration: delay)
+			let sequence = SKAction.sequence([waitAction, moveAction])
+
+			ball.run(sequence)
+		}
 	}
-	
+
 	func prepareGameContext() {
 		guard let context else { return }
 		
