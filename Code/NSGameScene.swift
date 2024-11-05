@@ -135,6 +135,7 @@ class NSGameScene: SKScene {
 	func showStartScreen() {
 		let title = SKLabelNode(text: "NSync")
 		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		title.fontName = "PPNeueMontreal-Bold"
 		addChild(title)
 	}
 	
@@ -187,8 +188,16 @@ class NSGameScene: SKScene {
 		removeAllChildren()
 		backgroundColor = .red
 		let title = SKLabelNode(text: "Game Over")
+		title.fontName = "PPNeueMontreal-Bold"
 		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
 		addChild(title)
+		
+		scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+		scoreNode.position = CGPoint(x: size.width / 2, y: size.height / 2 - 50)
+		addChild(scoreNode)
+		
+//		self.scoreNode.setup(in: self.frame)
+//		self.addChild(self.scoreNode)
 	}
 	
 	// Output feedback based on accuracy of tap
@@ -196,6 +205,7 @@ class NSGameScene: SKScene {
 		feedbackLabel = SKLabelNode()
 		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height * (7 / 10))
 		feedbackLabel.fontSize = 40
+		feedbackLabel.fontName = "PPNeueMontreal-Book"
 		if (accuracy == "Perfect!") {
 			feedbackLabel.fontColor = .green
 		}

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EF31BCA12CD93F870032D2E2 /* NSScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */; };
 		EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF428FB22CD74F9A0025F13C /* song1Beats.csv */; };
-		EF64FB0A2CD4BA48005D0E8A /* NSyncAudio2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
 		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
 		EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB32CD3CDB100019BE2 /* AudioKitEX */; };
@@ -26,6 +25,13 @@
 		EFC914C82CC8810F001CAA28 /* GameModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C52CC8810F001CAA28 /* GameModeType.swift */; };
 		EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C62CC8810F001CAA28 /* GameType.swift */; };
 		EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C32CC8810F001CAA28 /* Dependencies.swift */; };
+		EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */; };
+		EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */; };
+		EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */; };
+		EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */; };
+		EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */; };
+		EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */; };
+		EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */; };
 		EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */; };
 		EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */; };
 /* End PBXBuildFile section */
@@ -50,7 +56,6 @@
 /* Begin PBXFileReference section */
 		EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScoreNode.swift; sourceTree = "<group>"; };
 		EF428FB22CD74F9A0025F13C /* song1Beats.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = song1Beats.csv; sourceTree = "<group>"; };
-		EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio2.mp3; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
 		EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameContext.swift; sourceTree = "<group>"; };
@@ -66,6 +71,13 @@
 		EFC914C42CC8810F001CAA28 /* GameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		EFC914C52CC8810F001CAA28 /* GameModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeType.swift; sourceTree = "<group>"; };
 		EFC914C62CC8810F001CAA28 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
+		EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Bold.otf"; sourceTree = "<group>"; };
+		EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Book.otf"; sourceTree = "<group>"; };
+		EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Italic.otf"; sourceTree = "<group>"; };
+		EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Medium.otf"; sourceTree = "<group>"; };
+		EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBold.ttf"; sourceTree = "<group>"; };
+		EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBolditalic.otf"; sourceTree = "<group>"; };
+		EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Thin.otf"; sourceTree = "<group>"; };
 		EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio1.mp3; sourceTree = "<group>"; };
 		EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tap Noise.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +203,7 @@
 		EFC914CC2CC88145001CAA28 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				EFE554622CDADB5A00404F6B /* Fonts */,
 				EFC9149D2CC87869001CAA28 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -207,13 +220,26 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		EFE554622CDADB5A00404F6B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */,
+				EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */,
+				EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */,
+				EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */,
+				EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */,
+				EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */,
+				EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		EFF5C06D2CD0CAA900F3866E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				EF428FB22CD74F9A0025F13C /* song1Beats.csv */,
 				EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */,
 				EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */,
-				EF64FB092CD4BA48005D0E8A /* NSyncAudio2.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -347,11 +373,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
+				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
 				EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */,
+				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
+				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
+				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
 				EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */,
 				EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */,
+				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
-				EF64FB0A2CD4BA48005D0E8A /* NSyncAudio2.mp3 in Resources */,
+				EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
