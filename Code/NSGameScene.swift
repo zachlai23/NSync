@@ -21,7 +21,7 @@ class NSGameScene: SKScene {
 
 	var scoreNode = NSScoreNode()
 	
-	var audioPlayer: AVAudioPlayer!
+	var audioPlayer: AVAudioPlayer?
 	
 	var beatTimestamps: [Double] = []
 	var lastBeat: Double = 0
@@ -76,22 +76,31 @@ class NSGameScene: SKScene {
 	// Compare user tap to beat timestamp, output feedback
 	func matchingBeat(tapTime: Double) {
 		lastTap = tapTime
-		for beat in beatTimestamps {
+		for (index, beat) in beatTimestamps.enumerated() {
 			let accuracy = abs(tapTime - beat)
 			if accuracy <= 0.02{
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+				beatTimestamps.remove(at: index)	// Remove so two taps can't get points from the same beat
 				return
 			}
 			else if accuracy <= 0.25{
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+				beatTimestamps.remove(at: index)
 				return
 			}
 		}
-		showFeedback(forAccuracy: "Fail")
+//		showFeedback(forAccuracy: "Fail")
+//		context?.gameInfo.score -= 5
+//		scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+		// Stop music and move to game over state
+		if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
+			playingState.audioPlayer?.stop()
+		}
+		context?.stateMachine?.enter(NSGameOverState.self)
 	}
 	
 	// Check if user did not tap to a valid beat
@@ -103,11 +112,6 @@ class NSGameScene: SKScene {
 	}
 
 	override func update(_ currentTime: TimeInterval) {
-		let deltaTime = currentTime - lastUpdateTime
-		lastUpdateTime = currentTime
-		context?.stateMachine?.update(deltaTime: deltaTime)
-		
-		
 //		let playerTime = audioManager.audioPlayer.currentTime
 			
 //		audioManager.checkMissedBeat(currentTime: playerTime)
@@ -171,18 +175,26 @@ class NSGameScene: SKScene {
 			
 			self.spawnBalls()
 			
-			
-			
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
 				playingState.playAudio(fileName: "NSyncAudio1")
 			}
 		}
 	}
 	
+	// Show score and play again
+	func showGameOverScreen() {
+		removeAllActions()
+		removeAllChildren()
+		backgroundColor = .red
+		let title = SKLabelNode(text: "Game Over")
+		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		addChild(title)
+	}
+	
 	// Output feedback based on accuracy of tap
 	func showFeedback(forAccuracy accuracy: String) {
 		feedbackLabel = SKLabelNode()
-		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height * (7 / 10))
 		feedbackLabel.fontSize = 40
 		if (accuracy == "Perfect!") {
 			feedbackLabel.fontColor = .green

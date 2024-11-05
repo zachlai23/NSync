@@ -15,11 +15,7 @@ class NSScoreNode: SKNode {
 	    updateScore(with: 0)
 	    addChild(textNode)
 	}
-	
-	func adjustPosition() {
-		
-	}
-	
+
     func updateScore(with score: Int) {
 		textNode.text = String(score)
 	}

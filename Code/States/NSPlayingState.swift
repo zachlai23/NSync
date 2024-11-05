@@ -45,7 +45,9 @@ class NSPlayingState: GKState {
 		
 		do {
 			audioPlayer = try AVAudioPlayer(contentsOf: url)
-			audioPlayer?.play()
+			if audioPlayer != nil {
+				audioPlayer?.play()
+			}
 		} catch {
 			print("Error playing audio file: \(error)")
 		}
