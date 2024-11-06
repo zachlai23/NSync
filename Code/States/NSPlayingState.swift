@@ -28,7 +28,8 @@ class NSPlayingState: GKState {
 	override func didEnter(from previousState: GKState?) {
 		print("Entered Playing State.")
 		scene.removeAllChildren()
-		self.scene.loadBeatTimestamps(from: "song1Beats")
+//		self.scene.loadBeatTimestamps(from: "song1Beats")
+		self.scene.loadBeatTimestamps(from: "newBeatTimes")
 		self.scene.showPlayingScreen()
 	}
 	

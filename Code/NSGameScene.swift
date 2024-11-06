@@ -62,9 +62,12 @@ class NSGameScene: SKScene {
 			
 			// take the first value(timestamp) from each row and add to beatTimestamps array
 			for line in lines {
-				let columns = line.split(separator: ",")
-				if let firstColumn = columns.first,
-				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
+//				let columns = line.split(separator: ",")
+//				if let firstColumn = columns.first,
+//				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
+//					beatTimestamps.append(timestamp)
+//				}
+				if let timestamp = Double(line.trimmingCharacters(in: .whitespaces)) {
 					beatTimestamps.append(timestamp)
 				}
 			}
@@ -78,14 +81,14 @@ class NSGameScene: SKScene {
 		lastTap = tapTime
 		for (index, beat) in beatTimestamps.enumerated() {
 			let accuracy = abs(tapTime - beat)
-			if accuracy <= 0.02{
+			if accuracy <= 0.075{
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
 				beatTimestamps.remove(at: index)	// Remove so two taps can't get points from the same beat
 				return
 			}
-			else if accuracy <= 0.25{
+			else if accuracy <= 0.15{
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
@@ -93,9 +96,6 @@ class NSGameScene: SKScene {
 				return
 			}
 		}
-//		showFeedback(forAccuracy: "Fail")
-//		context?.gameInfo.score -= 5
-//		scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
 		// Stop music and move to game over state
 		if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
 			playingState.audioPlayer?.stop()
@@ -112,9 +112,7 @@ class NSGameScene: SKScene {
 	}
 
 	override func update(_ currentTime: TimeInterval) {
-//		let playerTime = audioManager.audioPlayer.currentTime
-			
-//		audioManager.checkMissedBeat(currentTime: playerTime)
+
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -177,7 +175,8 @@ class NSGameScene: SKScene {
 			self.spawnBalls()
 			
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
-				playingState.playAudio(fileName: "NSyncAudio1")
+//				playingState.playAudio(fileName: "NSyncAudio1")
+				playingState.playAudio(fileName: "Witoutriggerv2")
 			}
 		}
 	}
@@ -235,9 +234,9 @@ class NSGameScene: SKScene {
 			ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
 			self.addChild(ball)
 			
-			let delay = timestamp - 1.15
+			let delay = timestamp - 0.8
 			
-			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: 2.3)
+			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: 1.6)
 			
 			let waitAction = SKAction.wait(forDuration: delay)
 			let sequence = SKAction.sequence([waitAction, moveAction])

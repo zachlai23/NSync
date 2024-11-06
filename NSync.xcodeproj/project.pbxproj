@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF0DF1562CDB40A700292F5A /* Exportv2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */; };
+		EF0DF1582CDB40BC00292F5A /* newBeatTimes.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */; };
+		EF0DF15A2CDB42A200292F5A /* Witoutriggerv2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */; };
 		EF31BCA12CD93F870032D2E2 /* NSScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */; };
 		EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF428FB22CD74F9A0025F13C /* song1Beats.csv */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
@@ -54,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Exportv2.mp3; sourceTree = "<group>"; };
+		EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = newBeatTimes.csv; sourceTree = "<group>"; };
+		EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Witoutriggerv2.mp3; sourceTree = "<group>"; };
 		EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScoreNode.swift; sourceTree = "<group>"; };
 		EF428FB22CD74F9A0025F13C /* song1Beats.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = song1Beats.csv; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
@@ -238,7 +244,10 @@
 			isa = PBXGroup;
 			children = (
 				EF428FB22CD74F9A0025F13C /* song1Beats.csv */,
+				EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */,
 				EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */,
+				EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */,
+				EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */,
 				EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */,
 			);
 			path = Sounds;
@@ -373,12 +382,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF0DF15A2CDB42A200292F5A /* Witoutriggerv2.mp3 in Resources */,
 				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
 				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
+				EF0DF1582CDB40BC00292F5A /* newBeatTimes.csv in Resources */,
 				EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */,
 				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
 				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
 				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
+				EF0DF1562CDB40A700292F5A /* Exportv2.mp3 in Resources */,
 				EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */,
 				EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */,
 				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
