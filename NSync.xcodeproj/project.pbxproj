@@ -35,6 +35,7 @@
 		EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */; };
 		EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */; };
 		EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */; };
+		EFEA85972CDC34A9003D70AE /* NSPlayAgainButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */; };
 		EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */; };
 		EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBold.ttf"; sourceTree = "<group>"; };
 		EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBolditalic.otf"; sourceTree = "<group>"; };
 		EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Thin.otf"; sourceTree = "<group>"; };
+		EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayAgainButtonNode.swift; sourceTree = "<group>"; };
 		EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio1.mp3; sourceTree = "<group>"; };
 		EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tap Noise.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */,
+				EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				EFC914C72CC8810F001CAA28 /* GameContext.swift in Sources */,
 				EFA3BD342CD09AEC008A422B /* NSGameOverState.swift in Sources */,
 				EFA3BD322CD09AE3008A422B /* NSPlayingState.swift in Sources */,
+				EFEA85972CDC34A9003D70AE /* NSPlayAgainButtonNode.swift in Sources */,
 				EFC914C82CC8810F001CAA28 /* GameModeType.swift in Sources */,
 				EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */,
 				EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */,

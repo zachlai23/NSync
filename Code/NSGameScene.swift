@@ -20,6 +20,7 @@ class NSGameScene: SKScene {
 	var ball: SKShapeNode!
 
 	var scoreNode = NSScoreNode()
+	var playAgainButtonNode = NSPlayAgainButtonNode()
 	
 	var audioPlayer: AVAudioPlayer?
 	
@@ -188,15 +189,15 @@ class NSGameScene: SKScene {
 		backgroundColor = .red
 		let title = SKLabelNode(text: "Game Over")
 		title.fontName = "PPNeueMontreal-Bold"
-		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		title.position = CGPoint(x: size.width / 2, y: size.height * (2 / 3))
 		addChild(title)
 		
 		scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
-		scoreNode.position = CGPoint(x: size.width / 2, y: size.height / 2 - 50)
+		scoreNode.position = CGPoint(x: size.width / 2, y: size.height * (3 / 5))  // Move score position lower
 		addChild(scoreNode)
 		
-//		self.scoreNode.setup(in: self.frame)
-//		self.addChild(self.scoreNode)
+		playAgainButtonNode.setup(screenSize: size)
+		addChild(playAgainButtonNode)
 	}
 	
 	// Output feedback based on accuracy of tap
