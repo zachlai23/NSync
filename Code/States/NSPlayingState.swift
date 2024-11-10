@@ -29,7 +29,7 @@ class NSPlayingState: GKState {
 		print("Entered Playing State.")
 		scene.removeAllChildren()
 //		self.scene.loadBeatTimestamps(from: "song1Beats")
-		self.scene.loadBeatTimestamps(from: "newBeatTimes")
+		self.scene.loadBeatTimestamps(from: "3TimeStamps")
 		self.scene.showPlayingScreen()
 	}
 	

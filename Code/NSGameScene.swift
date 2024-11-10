@@ -89,7 +89,7 @@ class NSGameScene: SKScene {
 				beatTimestamps.remove(at: index)	// Remove so two taps can't get points from the same beat
 				return
 			}
-			else if accuracy <= 0.15{
+			else if accuracy <= 0.2{
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
@@ -104,13 +104,13 @@ class NSGameScene: SKScene {
 		context?.stateMachine?.enter(NSGameOverState.self)
 	}
 	
-	// Check if user did not tap to a valid beat
-	func checkMissedBeat(currentTime: Double) {
-		if currentTime - lastBeat > 0.5 && lastBeat > lastTap {
-			print("Fail - Missed a beat at \(lastBeat) seconds.")
-			lastCheckedTime = currentTime
-		}
-	}
+//	// Check if user did not tap to a valid beat
+//	func checkMissedBeat(currentTime: Double) {
+//		if currentTime - lastBeat > 0.5 && lastBeat > lastTap {
+//			print("Fail - Missed a beat at \(lastBeat) seconds.")
+//			lastCheckedTime = currentTime
+//		}
+//	}
 
 	override func update(_ currentTime: TimeInterval) {
 
@@ -125,9 +125,29 @@ class NSGameScene: SKScene {
 		// If tap in playing state, handle tap and play sound effect
 		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
 			playingState.handleTap(touch)
-
 			run(SKAction.playSoundFileNamed("Tap Noise", waitForCompletion: false))
+		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
+			if playAgainButtonNode.contains(touch.location(in: self)) {
+				restartGame()
+			}
 		}
+	}
+	
+	func restartGame() {
+		print("Game restarting.")
+		if let view = self.view {
+			// Create a new instance of GameScene with the same size
+			let newScene = NSGameScene(context: self.context!, size: view.bounds.size)
+			
+			// Transition to the new scene
+			let transition = SKTransition.fade(withDuration: 0.5)
+			view.presentScene(newScene, transition: transition)
+		}
+		context?.gameInfo.score = 0
+		scoreNode.updateScore(with: 0)
+		children.forEach { $0.removeFromParent() }
+		scoreNode.removeFromParent()
+		context?.stateMachine?.enter(NSPlayingState.self)
 	}
 	
 	// Start Screen: Gray screen with title
@@ -139,13 +159,16 @@ class NSGameScene: SKScene {
 	}
 	
 	func showPlayingScreen() {
-		childNode(withName: "title")?.removeFromParent()
+//		childNode(withName: "title")?.removeFromParent()
+		removeAllChildren()
 		
 		// Show instructions for 1 second
 		let title = SKLabelNode(text: "Tap to the beat.")
 		title.name = "title"
 		title.position = CGPoint(x: size.width / 2, y: size.height * (2.0 / 3))
 		addChild(title)
+		
+		backgroundColor = .gray
 
 		let waitAction = SKAction.wait(forDuration: 1.0)
 		let fadeOutAction = SKAction.fadeOut(withDuration: 1.0)
@@ -155,7 +178,7 @@ class NSGameScene: SKScene {
 		}
 
 		let sequence = SKAction.sequence([waitAction, fadeOutAction, removeAction])
-		
+				
 		// Add line and balls and begin audio
 		title.run(sequence) {
 			self.scoreNode.setup(in: self.frame)
@@ -177,7 +200,7 @@ class NSGameScene: SKScene {
 			
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
 //				playingState.playAudio(fileName: "NSyncAudio1")
-				playingState.playAudio(fileName: "Witoutriggerv2")
+				playingState.playAudio(fileName: "Witoutriggerv3")
 			}
 		}
 	}

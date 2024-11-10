@@ -17,7 +17,6 @@ class NSStartState: GKState {
 		super.init()
 	}
 	
-	
 	override func isValidNextState(_ stateClass: AnyClass) -> Bool {
 		stateClass is NSPlayingState.Type
 	}
