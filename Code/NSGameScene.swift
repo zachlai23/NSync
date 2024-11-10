@@ -61,13 +61,8 @@ class NSGameScene: SKScene {
 			let data = try String(contentsOf: url)
 			let lines = data.components(separatedBy: .newlines)
 			
-			// take the first value(timestamp) from each row and add to beatTimestamps array
+			// Add beat timestamps from csv to an array
 			for line in lines {
-//				let columns = line.split(separator: ",")
-//				if let firstColumn = columns.first,
-//				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
-//					beatTimestamps.append(timestamp)
-//				}
 				if let timestamp = Double(line.trimmingCharacters(in: .whitespaces)) {
 					beatTimestamps.append(timestamp)
 				}
@@ -127,6 +122,7 @@ class NSGameScene: SKScene {
 			playingState.handleTap(touch)
 			run(SKAction.playSoundFileNamed("Tap Noise", waitForCompletion: false))
 		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
+			// If play again button hit, restart game
 			if playAgainButtonNode.contains(touch.location(in: self)) {
 				restartGame()
 			}
@@ -135,11 +131,10 @@ class NSGameScene: SKScene {
 	
 	func restartGame() {
 		print("Game restarting.")
+		// Create new instance of GameScene to prevent lag when playing again
 		if let view = self.view {
-			// Create a new instance of GameScene with the same size
 			let newScene = NSGameScene(context: self.context!, size: view.bounds.size)
 			
-			// Transition to the new scene
 			let transition = SKTransition.fade(withDuration: 0.5)
 			view.presentScene(newScene, transition: transition)
 		}
@@ -159,7 +154,6 @@ class NSGameScene: SKScene {
 	}
 	
 	func showPlayingScreen() {
-//		childNode(withName: "title")?.removeFromParent()
 		removeAllChildren()
 		
 		// Show instructions for 1 second
