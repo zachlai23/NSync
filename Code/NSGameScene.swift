@@ -18,6 +18,7 @@ class NSGameScene: SKScene {
 	var feedbackLabel: SKLabelNode!
 	var line: SKShapeNode!
 	var ball: SKShapeNode!
+	var doublePointsLabel: SKLabelNode!
 
 	var scoreNode = NSScoreNode()
 	var playAgainButtonNode = NSPlayAgainButtonNode()
@@ -28,6 +29,9 @@ class NSGameScene: SKScene {
 	var lastBeat: Double = 0
 	var lastTap: Double = 0.0
 	var lastCheckedTime: Double = 0.0
+	
+	var numPerfects: Int = 0
+	var doublePeriod: Int = 0
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
@@ -82,7 +86,31 @@ class NSGameScene: SKScene {
 		lastTap = tapTime
 		for (index, beat) in beatTimestamps.enumerated() {
 			let accuracy = abs(tapTime - beat)
-			if accuracy <= 0.075{
+			if accuracy <= 0.075 {
+				// Need to fic - currently giving double points for 5 perfects, not 5 CONSECUTIVE perfects
+				numPerfects += 1
+				if numPerfects > 4 {
+					if doublePeriod < 5 {
+						if doublePeriod == 0 {
+							print("Double Points Period Started!")
+							doublePointsLabel = SKLabelNode()
+							doublePointsLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height * (9 / 10))
+							doublePointsLabel.fontSize = 40
+							doublePointsLabel.fontName = "PPNeueMontreal-Book"
+							doublePointsLabel.color = .white
+							doublePointsLabel.text = "DOUBLE POINTS!!!"
+							addChild(doublePointsLabel)
+						}
+						context?.gameInfo.score += 10
+						doublePeriod += 1
+					}
+					else {
+						print("Double points period ended.")
+						doublePeriod = 0
+						numPerfects = 1
+						doublePointsLabel.removeFromParent()
+					}
+				}
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
@@ -90,6 +118,18 @@ class NSGameScene: SKScene {
 				return
 			}
 			else if accuracy <= 0.2{
+				if numPerfects > 5 {
+					if doublePeriod < 5 {
+						context?.gameInfo.score += 5
+						doublePeriod += 1
+					}
+					else {
+						print("Double points period ended.")
+						doublePointsLabel.removeFromParent()
+						doublePeriod = 0
+						numPerfects = 0
+					}
+				}
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
