@@ -28,6 +28,7 @@ class NSGameScene: SKScene {
 	var lastBeat: Double = 0
 	var lastTap: Double = 0.0
 	var lastCheckedTime: Double = 0.0
+	var numPerfects: Int = 0
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
@@ -78,6 +79,10 @@ class NSGameScene: SKScene {
 		for (index, beat) in beatTimestamps.enumerated() {
 			let accuracy = abs(tapTime - beat)
 			if accuracy <= 0.075{
+				numPerfects += 1
+				if(numPerfects == 5) {
+					
+				}
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
@@ -85,6 +90,7 @@ class NSGameScene: SKScene {
 				return
 			}
 			else if accuracy <= 0.2{
+				numPerfects = 0
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
@@ -261,6 +267,10 @@ class NSGameScene: SKScene {
 
 			ball.run(sequence)
 		}
+	}
+	
+	func doublePoints() {
+		
 	}
 
 	func prepareGameContext() {
