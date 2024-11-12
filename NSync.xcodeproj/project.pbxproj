@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF0DF1562CDB40A700292F5A /* Exportv2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */; };
-		EF0DF1582CDB40BC00292F5A /* newBeatTimes.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */; };
-		EF0DF15A2CDB42A200292F5A /* Witoutriggerv2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */; };
 		EF31BCA12CD93F870032D2E2 /* NSScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */; };
-		EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF428FB22CD74F9A0025F13C /* song1Beats.csv */; };
-		EF60950A2CDD933C0099A221 /* Exportv3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EF6095092CDD933C0099A221 /* Exportv3.m4a */; };
 		EF60950C2CDD935D0099A221 /* 3TimeStamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF60950B2CDD935D0099A221 /* 3TimeStamps.csv */; };
 		EF6095102CDD94A70099A221 /* Witoutriggerv3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF60950F2CDD94A70099A221 /* Witoutriggerv3.mp3 */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
@@ -26,6 +21,7 @@
 		EFA3BD302CD09AD5008A422B /* NSStartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD2F2CD09AD5008A422B /* NSStartState.swift */; };
 		EFA3BD322CD09AE3008A422B /* NSPlayingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD312CD09AE3008A422B /* NSPlayingState.swift */; };
 		EFA3BD342CD09AEC008A422B /* NSGameOverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD332CD09AEC008A422B /* NSGameOverState.swift */; };
+		EFA74B442CE2D75D006CA9C7 /* NSDoublePointsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74B432CE2D75D006CA9C7 /* NSDoublePointsNode.swift */; };
 		EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC9149D2CC87869001CAA28 /* Assets.xcassets */; };
 		EFC914C72CC8810F001CAA28 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C42CC8810F001CAA28 /* GameContext.swift */; };
 		EFC914C82CC8810F001CAA28 /* GameModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C52CC8810F001CAA28 /* GameModeType.swift */; };
@@ -39,7 +35,6 @@
 		EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */; };
 		EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */; };
 		EFEA85972CDC34A9003D70AE /* NSPlayAgainButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */; };
-		EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */; };
 		EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -61,12 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Exportv2.mp3; sourceTree = "<group>"; };
-		EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = newBeatTimes.csv; sourceTree = "<group>"; };
-		EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Witoutriggerv2.mp3; sourceTree = "<group>"; };
 		EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScoreNode.swift; sourceTree = "<group>"; };
-		EF428FB22CD74F9A0025F13C /* song1Beats.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = song1Beats.csv; sourceTree = "<group>"; };
-		EF6095092CDD933C0099A221 /* Exportv3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Exportv3.m4a; sourceTree = "<group>"; };
 		EF60950B2CDD935D0099A221 /* 3TimeStamps.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = 3TimeStamps.csv; sourceTree = "<group>"; };
 		EF60950F2CDD94A70099A221 /* Witoutriggerv3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Witoutriggerv3.mp3; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
@@ -76,6 +66,7 @@
 		EFA3BD2F2CD09AD5008A422B /* NSStartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStartState.swift; sourceTree = "<group>"; };
 		EFA3BD312CD09AE3008A422B /* NSPlayingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayingState.swift; sourceTree = "<group>"; };
 		EFA3BD332CD09AEC008A422B /* NSGameOverState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameOverState.swift; sourceTree = "<group>"; };
+		EFA74B432CE2D75D006CA9C7 /* NSDoublePointsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDoublePointsNode.swift; sourceTree = "<group>"; };
 		EFC914962CC87868001CAA28 /* NSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC9149D2CC87869001CAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFC914A62CC87869001CAA28 /* NSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +83,6 @@
 		EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBolditalic.otf"; sourceTree = "<group>"; };
 		EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Thin.otf"; sourceTree = "<group>"; };
 		EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayAgainButtonNode.swift; sourceTree = "<group>"; };
-		EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncAudio1.mp3; sourceTree = "<group>"; };
 		EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tap Noise.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +148,7 @@
 			children = (
 				EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */,
 				EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */,
+				EFA74B432CE2D75D006CA9C7 /* NSDoublePointsNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -252,15 +243,9 @@
 		EFF5C06D2CD0CAA900F3866E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				EF428FB22CD74F9A0025F13C /* song1Beats.csv */,
-				EF0DF1572CDB40BC00292F5A /* newBeatTimes.csv */,
 				EF60950B2CDD935D0099A221 /* 3TimeStamps.csv */,
 				EFF5C0732CD0D22200F3866E /* Tap Noise.mp3 */,
-				EF0DF1592CDB42A200292F5A /* Witoutriggerv2.mp3 */,
 				EF60950F2CDD94A70099A221 /* Witoutriggerv3.mp3 */,
-				EF0DF1552CDB40A700292F5A /* Exportv2.mp3 */,
-				EF6095092CDD933C0099A221 /* Exportv3.m4a */,
-				EFF5C06C2CD0CAA900F3866E /* NSyncAudio1.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -394,19 +379,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF0DF15A2CDB42A200292F5A /* Witoutriggerv2.mp3 in Resources */,
 				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
 				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
 				EF60950C2CDD935D0099A221 /* 3TimeStamps.csv in Resources */,
-				EF0DF1582CDB40BC00292F5A /* newBeatTimes.csv in Resources */,
-				EFF5C06E2CD0CAA900F3866E /* NSyncAudio1.mp3 in Resources */,
 				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
 				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
-				EF60950A2CDD933C0099A221 /* Exportv3.m4a in Resources */,
 				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
-				EF0DF1562CDB40A700292F5A /* Exportv2.mp3 in Resources */,
 				EFF5C0742CD0D22200F3866E /* Tap Noise.mp3 in Resources */,
-				EF428FB32CD74F9A0025F13C /* song1Beats.csv in Resources */,
 				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
 				EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */,
@@ -437,6 +416,7 @@
 			files = (
 				EF83D2CA2CC9D17700ED75BF /* NSLayoutInfo.swift in Sources */,
 				EF83D2CC2CC9D1BF00ED75BF /* NSGameContext.swift in Sources */,
+				EFA74B442CE2D75D006CA9C7 /* NSDoublePointsNode.swift in Sources */,
 				EF83D2C82CC9D14000ED75BF /* NSGameInfo.swift in Sources */,
 				EFA3BD302CD09AD5008A422B /* NSStartState.swift in Sources */,
 				EFC914C72CC8810F001CAA28 /* GameContext.swift in Sources */,

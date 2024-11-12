@@ -21,6 +21,7 @@ class NSGameScene: SKScene {
 	var doublePointsLabel: SKLabelNode!
 
 	var scoreNode = NSScoreNode()
+	var doublePointsNode = NSDoublePointsNode()
 	var playAgainButtonNode = NSPlayAgainButtonNode()
 	
 	var audioPlayer: AVAudioPlayer?
@@ -32,6 +33,7 @@ class NSGameScene: SKScene {
 	
 	var numPerfects: Int = 0
 	var doublePeriod: Int = 0
+	var doublePointThreshold: Int = 5
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
@@ -67,11 +69,6 @@ class NSGameScene: SKScene {
 			
 			// take the first value(timestamp) from each row and add to beatTimestamps array
 			for line in lines {
-//				let columns = line.split(separator: ",")
-//				if let firstColumn = columns.first,
-//				   let timestamp = Double(firstColumn.trimmingCharacters(in: .whitespaces)) {
-//					beatTimestamps.append(timestamp)
-//				}
 				if let timestamp = Double(line.trimmingCharacters(in: .whitespaces)) {
 					beatTimestamps.append(timestamp)
 				}
@@ -87,29 +84,9 @@ class NSGameScene: SKScene {
 		for (index, beat) in beatTimestamps.enumerated() {
 			let accuracy = abs(tapTime - beat)
 			if accuracy <= 0.075 {
-				// Need to fic - currently giving double points for 5 perfects, not 5 CONSECUTIVE perfects
-				numPerfects += 1
-				if numPerfects > 4 {
-					if doublePeriod < 5 {
-						if doublePeriod == 0 {
-							print("Double Points Period Started!")
-							doublePointsLabel = SKLabelNode()
-							doublePointsLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height * (9 / 10))
-							doublePointsLabel.fontSize = 40
-							doublePointsLabel.fontName = "PPNeueMontreal-Book"
-							doublePointsLabel.color = .white
-							doublePointsLabel.text = "DOUBLE POINTS!!!"
-							addChild(doublePointsLabel)
-						}
-						context?.gameInfo.score += 10
-						doublePeriod += 1
-					}
-					else {
-						print("Double points period ended.")
-						doublePeriod = 0
-						numPerfects = 1
-						doublePointsLabel.removeFromParent()
-					}
+				// Only apply double points period if game has been played for at least 20 seconds
+				if beat > 20.0 {
+					doublePointsPerfect()
 				}
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
@@ -118,17 +95,8 @@ class NSGameScene: SKScene {
 				return
 			}
 			else if accuracy <= 0.2{
-				if numPerfects > 5 {
-					if doublePeriod < 5 {
-						context?.gameInfo.score += 5
-						doublePeriod += 1
-					}
-					else {
-						print("Double points period ended.")
-						doublePointsLabel.removeFromParent()
-						doublePeriod = 0
-						numPerfects = 0
-					}
+				if beat > 20.0 {
+					doublePointsGood()
 				}
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
@@ -142,6 +110,46 @@ class NSGameScene: SKScene {
 			playingState.audioPlayer?.stop()
 		}
 		context?.stateMachine?.enter(NSGameOverState.self)
+	}
+	
+	// Update double points feature for a perfect tap
+	func doublePointsPerfect() {
+		numPerfects += 1
+		if numPerfects >= doublePointThreshold {
+			if doublePeriod < doublePointThreshold {
+				if doublePeriod == 0 {
+					self.doublePointsNode.setup(in: self.frame)
+					self.addChild(self.doublePointsNode)
+				}
+				context?.gameInfo.score += 10
+				doublePeriod += 1
+			}
+			else {
+				doublePeriod = 0
+				numPerfects = 0
+				doublePointsNode.removeFromParent()
+				doublePointThreshold += 1
+			}
+		}
+	}
+	
+	// Update double points feature for as 'good' tap
+	func doublePointsGood() {
+		if numPerfects > doublePointThreshold {
+			if doublePeriod < doublePointThreshold {
+				context?.gameInfo.score += 5
+				doublePeriod += 1
+			}
+			else {
+				print("Double points period ended.")
+				doublePointsNode.removeFromParent()
+				doublePeriod = 0
+				numPerfects = 0
+				doublePointThreshold += 1
+			}
+		} else if doublePeriod == 0{
+			numPerfects = 0
+		}
 	}
 	
 //	// Check if user did not tap to a valid beat
