@@ -247,8 +247,7 @@ class NSGameScene: SKScene {
 			self.spawnBalls()
 			
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
-//				playingState.playAudio(fileName: "NSyncAudio1")
-				playingState.playAudio(fileName: "Witoutriggerv3")
+				playingState.playAudio(fileName: "Dreamy")
 			}
 		}
 	}
