@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EF31BCA12CD93F870032D2E2 /* NSScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */; };
-		EF4601FE2CE9397E00D85B44 /* UpbeatSimple.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF4601FD2CE9397E00D85B44 /* UpbeatSimple.csv */; };
-		EF4602002CE9399C00D85B44 /* Dreamy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF4601FF2CE9399C00D85B44 /* Dreamy.mp3 */; };
-		EF4602022CE93F5A00D85B44 /* ManualSimple.csv in Resources */ = {isa = PBXBuildFile; fileRef = EF4602012CE93F5A00D85B44 /* ManualSimple.csv */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
 		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
 		EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB32CD3CDB100019BE2 /* AudioKitEX */; };
@@ -22,15 +19,14 @@
 		EFA3BD302CD09AD5008A422B /* NSStartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD2F2CD09AD5008A422B /* NSStartState.swift */; };
 		EFA3BD322CD09AE3008A422B /* NSPlayingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD312CD09AE3008A422B /* NSPlayingState.swift */; };
 		EFA3BD342CD09AEC008A422B /* NSGameOverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA3BD332CD09AEC008A422B /* NSGameOverState.swift */; };
-		EFA5EF8C2CE549C3009A8BD5 /* Witoutriggerv3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFA5EF8A2CE549C3009A8BD5 /* Witoutriggerv3.mp3 */; };
 		EFA5EF8D2CE549C3009A8BD5 /* Tap Noise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFA5EF892CE549C3009A8BD5 /* Tap Noise.mp3 */; };
-		EFA5EF8E2CE549C3009A8BD5 /* 3TimeStamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = EFA5EF882CE549C3009A8BD5 /* 3TimeStamps.csv */; };
 		EFA74B442CE2D75D006CA9C7 /* NSDoublePointsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74B432CE2D75D006CA9C7 /* NSDoublePointsNode.swift */; };
 		EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC9149D2CC87869001CAA28 /* Assets.xcassets */; };
 		EFC914C72CC8810F001CAA28 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C42CC8810F001CAA28 /* GameContext.swift */; };
 		EFC914C82CC8810F001CAA28 /* GameModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C52CC8810F001CAA28 /* GameModeType.swift */; };
 		EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C62CC8810F001CAA28 /* GameType.swift */; };
 		EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C32CC8810F001CAA28 /* Dependencies.swift */; };
+		EFDFE6772CE947980053F123 /* NSyncTapHold.csv in Resources */ = {isa = PBXBuildFile; fileRef = EFDFE6762CE947980053F123 /* NSyncTapHold.csv */; };
 		EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */; };
 		EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */; };
 		EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */; };
@@ -39,9 +35,7 @@
 		EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */; };
 		EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */; };
 		EFEA85972CDC34A9003D70AE /* NSPlayAgainButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */; };
-		EFF04C0E2CE87C4700FE418D /* NSyncManualTimestamps.csv in Resources */ = {isa = PBXBuildFile; fileRef = EFF04C0D2CE87C4700FE418D /* NSyncManualTimestamps.csv */; };
-		EFF04C102CE87CD200FE418D /* NSyncTry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFF04C0F2CE87CD200FE418D /* NSyncTry.mp3 */; };
-		EFF04C122CE8844A00FE418D /* NSyncManual2.csv in Resources */ = {isa = PBXBuildFile; fileRef = EFF04C112CE8844A00FE418D /* NSyncManual2.csv */; };
+		EFED21392CEAE67300876F08 /* Song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFED21382CEAE67300876F08 /* Song.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,9 +57,6 @@
 
 /* Begin PBXFileReference section */
 		EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScoreNode.swift; sourceTree = "<group>"; };
-		EF4601FD2CE9397E00D85B44 /* UpbeatSimple.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpbeatSimple.csv; sourceTree = "<group>"; };
-		EF4601FF2CE9399C00D85B44 /* Dreamy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dreamy.mp3; sourceTree = "<group>"; };
-		EF4602012CE93F5A00D85B44 /* ManualSimple.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = ManualSimple.csv; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
 		EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameContext.swift; sourceTree = "<group>"; };
@@ -73,9 +64,7 @@
 		EFA3BD2F2CD09AD5008A422B /* NSStartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStartState.swift; sourceTree = "<group>"; };
 		EFA3BD312CD09AE3008A422B /* NSPlayingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayingState.swift; sourceTree = "<group>"; };
 		EFA3BD332CD09AEC008A422B /* NSGameOverState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameOverState.swift; sourceTree = "<group>"; };
-		EFA5EF882CE549C3009A8BD5 /* 3TimeStamps.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = 3TimeStamps.csv; sourceTree = "<group>"; };
 		EFA5EF892CE549C3009A8BD5 /* Tap Noise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tap Noise.mp3"; sourceTree = "<group>"; };
-		EFA5EF8A2CE549C3009A8BD5 /* Witoutriggerv3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Witoutriggerv3.mp3; sourceTree = "<group>"; };
 		EFA74B432CE2D75D006CA9C7 /* NSDoublePointsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDoublePointsNode.swift; sourceTree = "<group>"; };
 		EFC914962CC87868001CAA28 /* NSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC9149D2CC87869001CAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +74,7 @@
 		EFC914C42CC8810F001CAA28 /* GameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		EFC914C52CC8810F001CAA28 /* GameModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeType.swift; sourceTree = "<group>"; };
 		EFC914C62CC8810F001CAA28 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
+		EFDFE6762CE947980053F123 /* NSyncTapHold.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = NSyncTapHold.csv; sourceTree = "<group>"; };
 		EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Bold.otf"; sourceTree = "<group>"; };
 		EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Book.otf"; sourceTree = "<group>"; };
 		EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Italic.otf"; sourceTree = "<group>"; };
@@ -93,9 +83,7 @@
 		EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBolditalic.otf"; sourceTree = "<group>"; };
 		EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Thin.otf"; sourceTree = "<group>"; };
 		EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayAgainButtonNode.swift; sourceTree = "<group>"; };
-		EFF04C0D2CE87C4700FE418D /* NSyncManualTimestamps.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = NSyncManualTimestamps.csv; sourceTree = "<group>"; };
-		EFF04C0F2CE87CD200FE418D /* NSyncTry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NSyncTry.mp3; sourceTree = "<group>"; };
-		EFF04C112CE8844A00FE418D /* NSyncManual2.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = NSyncManual2.csv; sourceTree = "<group>"; };
+		EFED21382CEAE67300876F08 /* Song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Song.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -184,15 +172,9 @@
 		EFA5EF8B2CE549C3009A8BD5 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				EFA5EF882CE549C3009A8BD5 /* 3TimeStamps.csv */,
-				EFF04C0D2CE87C4700FE418D /* NSyncManualTimestamps.csv */,
-				EFF04C112CE8844A00FE418D /* NSyncManual2.csv */,
-				EF4601FD2CE9397E00D85B44 /* UpbeatSimple.csv */,
-				EF4602012CE93F5A00D85B44 /* ManualSimple.csv */,
+				EFDFE6762CE947980053F123 /* NSyncTapHold.csv */,
+				EFED21382CEAE67300876F08 /* Song.mp3 */,
 				EFA5EF892CE549C3009A8BD5 /* Tap Noise.mp3 */,
-				EFF04C0F2CE87CD200FE418D /* NSyncTry.mp3 */,
-				EFA5EF8A2CE549C3009A8BD5 /* Witoutriggerv3.mp3 */,
-				EF4601FF2CE9399C00D85B44 /* Dreamy.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -397,23 +379,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFF04C102CE87CD200FE418D /* NSyncTry.mp3 in Resources */,
 				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
-				EFF04C122CE8844A00FE418D /* NSyncManual2.csv in Resources */,
 				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
 				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
-				EF4601FE2CE9397E00D85B44 /* UpbeatSimple.csv in Resources */,
 				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
 				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
-				EF4602022CE93F5A00D85B44 /* ManualSimple.csv in Resources */,
-				EFA5EF8C2CE549C3009A8BD5 /* Witoutriggerv3.mp3 in Resources */,
+				EFDFE6772CE947980053F123 /* NSyncTapHold.csv in Resources */,
 				EFA5EF8D2CE549C3009A8BD5 /* Tap Noise.mp3 in Resources */,
-				EFA5EF8E2CE549C3009A8BD5 /* 3TimeStamps.csv in Resources */,
 				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
-				EFF04C0E2CE87C4700FE418D /* NSyncManualTimestamps.csv in Resources */,
+				EFED21392CEAE67300876F08 /* Song.mp3 in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
 				EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */,
-				EF4602002CE9399C00D85B44 /* Dreamy.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

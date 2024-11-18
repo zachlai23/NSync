@@ -29,13 +29,17 @@ class NSPlayingState: GKState {
 		print("Entered Playing State.")
 		scene.removeAllChildren()
 //		self.scene.loadBeatTimestamps(from: "song1Beats")
-		self.scene.loadBeatTimestamps(from: "ManualSimple")
+		self.scene.loadBeatTimestamps(from: "NSyncTapHold")
 		self.scene.showPlayingScreen()
 	}
 	
 	func handleTap(_ touch: UITouch) {
-		let tapTime = audioPlayer?.currentTime		
-		scene.matchingBeat(tapTime: tapTime ?? 0.0)
+//		if scene.isLongPressActive {
+//			print("Tap ignored due to active long press")
+//			return
+//		}
+		let tapTime = audioPlayer?.currentTime
+		scene.matchingTap(tapTime: tapTime ?? 0.0)
 	}
 	
 	func playAudio(fileName: String) {
