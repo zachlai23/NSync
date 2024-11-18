@@ -14,7 +14,7 @@ import AVFoundation
 class NSGameScene: SKScene {
 	
 	weak var context: NSGameContext?
-	
+	var isScoreSetUp: Bool = false
 	
 	var feedbackLabel: SKLabelNode!
 	var line: SKShapeNode!
@@ -40,6 +40,7 @@ class NSGameScene: SKScene {
 	}
 	
 	var beatTimestamps: [Beat] = []
+	var adjustedBeatTimestamps: [Beat] = []
 	var lastBeat: Double = 0
 	var lastTap: Double = 0.0
 	var lastCheckedTime: Double = 0.0
@@ -53,8 +54,10 @@ class NSGameScene: SKScene {
 	
 	private var lastUpdateTime: TimeInterval = 0
 	
-	init(context: NSGameContext, size: CGSize) {
+	init(context: NSGameContext, size: CGSize, score: Int = 0) {
 		self.context = context
+		context.gameInfo.score = score
+		scoreNode.updateScore(with: score)
 		super.init(size: size)
 	}
 	
@@ -71,6 +74,13 @@ class NSGameScene: SKScene {
 		context.stateMachine?.enter(NSStartState.self)
 		context.layoutInfo = NSLayoutInfo(screenSize: size)
 	}
+	
+	override func update(_ currentTime: TimeInterval) {
+		if let currentState = context?.stateMachine?.currentState as? NSPlayingState {
+			currentState.checkIfSongFinished()
+		}
+	}
+
 	
 	// Load timestamps, type(tap or hold), and duration(if hold) from a csv to an array of Beat objects
 	func loadBeatTimestamps(from fileName: String) {
@@ -94,11 +104,13 @@ class NSGameScene: SKScene {
 							// If tap, create Beat object without duraton
 							let beat = Beat(timestamp: timestamp, type: "tap", duration: nil)
 							beatTimestamps.append(beat)
+							adjustedBeatTimestamps.append(beat)
 						} else if type == "hold", components.count >= 3 {
 							// If hold, get duration value
 							if let duration = Double(components[2].trimmingCharacters(in: .whitespaces)) {
 								let beat = Beat(timestamp: timestamp, type: "hold", duration: duration)
 								beatTimestamps.append(beat)
+								adjustedBeatTimestamps.append(beat)
 							}
 						}
 					}
@@ -106,6 +118,27 @@ class NSGameScene: SKScene {
 			}
 		} catch {
 			print("Error reading CSV file: \(error)")
+		}
+	}
+	
+	// Adjust beat timestamps when game loops and speeds up
+	func adjustBeatTimestamps() {
+		if let context = context {
+			let speed = context.speedMultiplier
+			
+			// Adjust each beat's timestamp
+			let adjustedBeats = beatTimestamps.map { beat -> Beat in
+				var adjustedBeat = beat
+				adjustedBeat.timestamp /= Double(speed)
+				
+				// Adjust duration for "hold" beats
+				if let duration = adjustedBeat.duration {
+					adjustedBeat.duration = duration / Double(speed)
+				}
+				return adjustedBeat
+			}
+			
+			adjustedBeatTimestamps = adjustedBeats
 		}
 	}
 	
@@ -205,7 +238,7 @@ class NSGameScene: SKScene {
 			context?.stateMachine?.enter(NSPlayingState.self)
 			// If tap in playing state, handle tap and play sound effect
 		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
-			run(SKAction.playSoundFileNamed("Tap Noise", waitForCompletion: false))
+			run(SKAction.playSoundFileNamed("tapNoise2", waitForCompletion: false))
 			playingState.handleTap(touch)
 		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
 			// If play again button hit, restart game
@@ -215,6 +248,7 @@ class NSGameScene: SKScene {
 		}
 	}
 	
+	// Using long press gesture to detect "holds"
 	@objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
 		if gestureRecognizer.state == .began {
 			isLongPressActive = true
@@ -251,7 +285,7 @@ class NSGameScene: SKScene {
 			showFeedback(forAccuracy: "Perfect!")
 			context?.gameInfo.score += 10
 			scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
-			beatTimestamps.removeFirst() // Remove beat just check
+			beatTimestamps.removeFirst() // Remove beat just checked
 		} else if accuracy <= 0.5{
 			showFeedback(forAccuracy: "Good")
 			context?.gameInfo.score += 5
@@ -268,9 +302,13 @@ class NSGameScene: SKScene {
 	
 	func restartGame() {
 		print("Game restarting.")
+		
+		audioPlayer?.stop()
+		
+		adjustedBeatTimestamps = beatTimestamps
 		// Create new instance of GameScene to prevent lag when playing again
 		if let view = self.view {
-			let newScene = NSGameScene(context: self.context!, size: view.bounds.size)
+			let newScene = NSGameScene(context: self.context!, size: view.bounds.size, score: 0)
 			
 			let transition = SKTransition.fade(withDuration: 0.5)
 			view.presentScene(newScene, transition: transition)
@@ -279,6 +317,30 @@ class NSGameScene: SKScene {
 		scoreNode.updateScore(with: 0)
 		children.forEach { $0.removeFromParent() }
 		scoreNode.removeFromParent()
+		
+		context?.speedMultiplier = 1.0
+				
+		context?.stateMachine?.enter(NSPlayingState.self)
+	}
+	
+	// Game loop if song finished, pass score into new scene
+	func restartGameStillPlaying() {
+		print("Still playing, looping back over.")
+		
+		if let context = context {
+			context.speedMultiplier += 0.1 // Increase speed by 10%
+		}
+		
+		adjustBeatTimestamps()
+		
+		audioPlayer?.stop()
+		if let view = self.view {
+			let newScene = NSGameScene(context: self.context!, size: view.bounds.size, score: context?.gameInfo.score ?? 0)
+			
+			let transition = SKTransition.fade(withDuration: 0.5)
+			view.presentScene(newScene, transition: transition)
+		}
+				
 		context?.stateMachine?.enter(NSPlayingState.self)
 	}
 	
@@ -291,7 +353,11 @@ class NSGameScene: SKScene {
 	}
 	
 	func showPlayingScreen() {
-		removeAllChildren()
+		for node in children {
+			if node.name != "scoreNode" {
+				node.removeFromParent()
+			}
+		}
 		
 		// Show instructions for 1 second
 		let title = SKLabelNode(text: "Tap to the beat.")
@@ -312,10 +378,12 @@ class NSGameScene: SKScene {
 		
 		// Add line and balls and begin audio
 		title.run(sequence) {
+//			if self.scoreNode != nil {
 			self.scoreNode.setup(in: self.frame)
+			self.scoreNode.updateScore(with: self.context?.gameInfo.score ?? 0)
 			self.addChild(self.scoreNode)
+//			}
 			
-			self.line = SKShapeNode()
 			self.line = SKShapeNode()
 			let lineStartY = self.frame.height * (3.0 / 5.0)
 			let linePath = CGMutablePath()
@@ -328,10 +396,11 @@ class NSGameScene: SKScene {
 			self.addChild(self.line)
 			
 			self.spawnBalls()
-			
+		
 			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
 				playingState.playAudio(fileName: "Song")
 			}
+			
 		}
 	}
 	
@@ -382,17 +451,20 @@ class NSGameScene: SKScene {
 	
 	// Blue balls moving horizontally, passing the middle of the screen at each beat to tap to
 	func spawnBalls() {
-		for beat in beatTimestamps {
+		for beat in adjustedBeatTimestamps {
 			// Create ball node and action
 			let ball = SKShapeNode(circleOfRadius: 15)
 			ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
 			self.addChild(ball)
 			
-			let delay = beat.timestamp - 0.8
+			let adjustedDelay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
+			let adjustedDuration = 1.6 / context!.speedMultiplier
 			
-			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: 1.6)
+//			let delay = beat.timestamp - 0.8
 			
-			let waitAction = SKAction.wait(forDuration: delay)
+			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: TimeInterval(adjustedDuration))
+			
+			let waitAction = SKAction.wait(forDuration: adjustedDelay)
 			let sequence = SKAction.sequence([waitAction, moveAction])
 			if beat.type == "tap" {
 				ball.fillColor = .blue
@@ -406,14 +478,15 @@ class NSGameScene: SKScene {
 				holdText.text = "Hold"
 				holdText.fontName = "PPNeueMontreal-Book"
 				
-				let waitToShowText = SKAction.wait(forDuration: beat.timestamp)
+				let adjustedTextDelay = beat.timestamp / Double(context!.speedMultiplier)
+				let waitToShowText = SKAction.wait(forDuration: adjustedTextDelay)
 				let addTextAction = SKAction.run {
 					self.addChild(holdText)
 				}
-				
-				// Remove Text & timing
+
 				if let holdDuration = beat.duration {
-					let removeTextDelay = SKAction.wait(forDuration: holdDuration)
+					let adjustedHoldDuration = holdDuration / Double(context!.speedMultiplier)
+					let removeTextDelay = SKAction.wait(forDuration: adjustedHoldDuration)
 					let removeTextAction = SKAction.run {
 						holdText.removeFromParent()
 					}
@@ -424,10 +497,6 @@ class NSGameScene: SKScene {
 			}
 			ball.run(sequence)
 		}
-	}
-	
-	func doublePoints() {
-		
 	}
 
 	

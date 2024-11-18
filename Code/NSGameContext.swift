@@ -19,6 +19,9 @@ class NSGameContext: GameContext {
 	var gameInfo: NSGameInfo
 	var layoutInfo: NSLayoutInfo = .init(screenSize: .zero)
 	
+	var speedMultiplier: Float = 1.0
+	var accuracyThreshold: Double = 0.5
+	
 	private(set) var stateMachine: GKStateMachine?
 	
 	init(dependencies: Dependencies, gameMode: GameModeType) {

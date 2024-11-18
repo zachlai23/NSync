@@ -27,17 +27,17 @@ class NSPlayingState: GKState {
 	
 	override func didEnter(from previousState: GKState?) {
 		print("Entered Playing State.")
-		scene.removeAllChildren()
-//		self.scene.loadBeatTimestamps(from: "song1Beats")
+//		scene.removeAllChildren()
+		for node in scene.children {
+			if node.name != "scoreNode" {
+				node.removeFromParent()
+			}
+		}
 		self.scene.loadBeatTimestamps(from: "NSyncTapHold")
 		self.scene.showPlayingScreen()
 	}
 	
 	func handleTap(_ touch: UITouch) {
-//		if scene.isLongPressActive {
-//			print("Tap ignored due to active long press")
-//			return
-//		}
 		let tapTime = audioPlayer?.currentTime
 		scene.matchingTap(tapTime: tapTime ?? 0.0)
 	}
@@ -50,7 +50,11 @@ class NSPlayingState: GKState {
 		
 		do {
 			audioPlayer = try AVAudioPlayer(contentsOf: url)
+//			audioPlayer?.numberOfLoops = -1
 			if audioPlayer != nil {
+				audioPlayer?.currentTime = 0
+				audioPlayer?.rate = context.speedMultiplier ?? 1.0
+				audioPlayer?.enableRate = true
 				audioPlayer?.play()
 			}
 		} catch {
@@ -58,4 +62,13 @@ class NSPlayingState: GKState {
 		}
 	}
 	
+	func checkIfSongFinished() {
+		if let player = audioPlayer {
+				if player.currentTime >= player.duration - 0.1 { // Check if song is finished
+					print("Song finished. Restarting game.")
+					scene.restartGameStillPlaying()
+				}
+			}
+	}
+
 }
