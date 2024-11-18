@@ -238,7 +238,7 @@ class NSGameScene: SKScene {
 			context?.stateMachine?.enter(NSPlayingState.self)
 			// If tap in playing state, handle tap and play sound effect
 		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
-			run(SKAction.playSoundFileNamed("tapNoise2", waitForCompletion: false))
+			run(SKAction.playSoundFileNamed("keyboardClick2", waitForCompletion: false))
 			playingState.handleTap(touch)
 		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
 			// If play again button hit, restart game
