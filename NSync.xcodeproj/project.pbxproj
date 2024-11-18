@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EF31BCA12CD93F870032D2E2 /* NSScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */; };
-		EF4A2F802CEB250B0042F977 /* keyboardClick2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF4A2F7F2CEB250B0042F977 /* keyboardClick2.mp3 */; };
+		EF37E2322CEB3FCE00FB2747 /* longType3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF37E2312CEB3FCE00FB2747 /* longType3.mp3 */; };
+		EF37E2342CEB40CA00FB2747 /* keyboardClick3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EF37E2332CEB40CA00FB2747 /* keyboardClick3.mp3 */; };
 		EF767CAF2CD364AD00019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CAE2CD364AD00019BE2 /* AudioKit */; };
 		EF767CB12CD364E000019BE2 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB02CD364E000019BE2 /* AudioKit */; };
 		EF767CB42CD3CDB100019BE2 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = EF767CB32CD3CDB100019BE2 /* AudioKitEX */; };
@@ -57,7 +58,8 @@
 
 /* Begin PBXFileReference section */
 		EF31BCA02CD93F870032D2E2 /* NSScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScoreNode.swift; sourceTree = "<group>"; };
-		EF4A2F7F2CEB250B0042F977 /* keyboardClick2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = keyboardClick2.mp3; sourceTree = "<group>"; };
+		EF37E2312CEB3FCE00FB2747 /* longType3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = longType3.mp3; sourceTree = "<group>"; };
+		EF37E2332CEB40CA00FB2747 /* keyboardClick3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = keyboardClick3.mp3; sourceTree = "<group>"; };
 		EF83D2C72CC9D14000ED75BF /* NSGameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameInfo.swift; sourceTree = "<group>"; };
 		EF83D2C92CC9D17700ED75BF /* NSLayoutInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutInfo.swift; sourceTree = "<group>"; };
 		EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSGameContext.swift; sourceTree = "<group>"; };
@@ -173,7 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				EFDFE6762CE947980053F123 /* NSyncTapHold.csv */,
-				EF4A2F7F2CEB250B0042F977 /* keyboardClick2.mp3 */,
+				EF37E2332CEB40CA00FB2747 /* keyboardClick3.mp3 */,
+				EF37E2312CEB3FCE00FB2747 /* longType3.mp3 */,
 				EFED21382CEAE67300876F08 /* Song.mp3 */,
 			);
 			path = Sounds;
@@ -379,16 +382,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF37E2322CEB3FCE00FB2747 /* longType3.mp3 in Resources */,
 				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
 				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
 				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
 				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
 				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
 				EFDFE6772CE947980053F123 /* NSyncTapHold.csv in Resources */,
-				EF4A2F802CEB250B0042F977 /* keyboardClick2.mp3 in Resources */,
 				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
 				EFED21392CEAE67300876F08 /* Song.mp3 in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
+				EF37E2342CEB40CA00FB2747 /* keyboardClick3.mp3 in Resources */,
 				EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

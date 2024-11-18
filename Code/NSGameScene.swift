@@ -18,6 +18,7 @@ class NSGameScene: SKScene {
 	
 	var feedbackLabel: SKLabelNode!
 	var line: SKShapeNode!
+	var ring: SKShapeNode!
 	var ball: SKShapeNode!
 	var doublePointsLabel: SKLabelNode!
 	
@@ -32,12 +33,16 @@ class NSGameScene: SKScene {
 	var initialTimestamp: TimeInterval?
 	
 	var audioPlayer: AVAudioPlayer?
+	var typingNoisePlayer: AVAudioPlayer?
 	
 	struct Beat {
 		var timestamp: Double
 		var type: String // "tap" or "hold"
 		var duration: Double? // Duration of hold
+		var node: SKShapeNode?
 	}
+	
+	var beatToNodeMap: [Double: SKShapeNode] = [:]
 	
 	var beatTimestamps: [Beat] = []
 	var adjustedBeatTimestamps: [Beat] = []
@@ -142,6 +147,23 @@ class NSGameScene: SKScene {
 		}
 	}
 	
+	func startTypingNoise() {
+		guard let soundURL = Bundle.main.url(forResource: "longType3", withExtension: "mp3") else { return }
+		do {
+			typingNoisePlayer = try AVAudioPlayer(contentsOf: soundURL)
+			typingNoisePlayer?.numberOfLoops = -1  // Loop indefinitely while holding
+			typingNoisePlayer?.volume = 0.8  // Adjust volume to your preference
+			typingNoisePlayer?.play()
+		} catch {
+			print("Error loading sound file: \(error)")
+		}
+	}
+	
+	func stopTypingNoise() {
+	 typingNoisePlayer?.stop()
+	 typingNoisePlayer = nil
+	}
+	
 	// Compare user tap to beat timestamp, output feedback
 	func matchingTap(tapTime: Double) {
 		lastTap = tapTime
@@ -152,7 +174,7 @@ class NSGameScene: SKScene {
 			let accuracy = abs(tapTime - (firstBeat?.timestamp ?? 0.0))
 			
 			// Check accuracy and award corresponding points
-			if accuracy <= 0.075 {
+			if accuracy <= 0.15 {
 				// Only apply double points period if game has been played for at least 40 seconds
 				if firstBeat!.timestamp > 40.0 {
 					doublePointsPerfect()
@@ -160,16 +182,34 @@ class NSGameScene: SKScene {
 				showFeedback(forAccuracy: "Perfect!")
 				context?.gameInfo.score += 10
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+				
+				// Scale ball/bar up during correct tap
+				if let shapeNode = beatToNodeMap[firstBeat!.timestamp] {
+					let scaleUpAction = SKAction.scale(to: 1.35, duration: 0.1)
+					let scaleDownAction = SKAction.scale(to: 1.0, duration: 0.1)
+					let scaleSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+					shapeNode.run(scaleSequence)
+				}
+				
 				beatTimestamps.removeFirst()  // Remove current beat
 				return
 
-			} else if accuracy <= 0.2 {
+			} else if accuracy <= 0.25 {
 				if firstBeat!.timestamp > 40.0 {
 					doublePointsGood()
 				}
 				showFeedback(forAccuracy: "Good")
 				context?.gameInfo.score += 5
 				scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+				
+				// Scale ball/bar up during correct tap
+				if let shapeNode = beatToNodeMap[firstBeat!.timestamp] {
+					let scaleUpAction = SKAction.scale(to: 1.25, duration: 0.1)
+					let scaleDownAction = SKAction.scale(to: 1.0, duration: 0.1)
+					let scaleSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+					shapeNode.run(scaleSequence)
+				}
+				
 				beatTimestamps.removeFirst()
 				return
 			} else {
@@ -238,7 +278,7 @@ class NSGameScene: SKScene {
 			context?.stateMachine?.enter(NSPlayingState.self)
 			// If tap in playing state, handle tap and play sound effect
 		} else if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
-			run(SKAction.playSoundFileNamed("keyboardClick2", waitForCompletion: false))
+			run(SKAction.playSoundFileNamed("keyboardClick3", waitForCompletion: false))
 			playingState.handleTap(touch)
 		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
 			// If play again button hit, restart game
@@ -254,12 +294,16 @@ class NSGameScene: SKScene {
 			isLongPressActive = true
 			print("Long press started")
 			
-			// Record the start time when the gesture begins
+			startTypingNoise()
+			
+			// Record start time gesture begins
 			pressStartTime = Date()
 			
 		} else if gestureRecognizer.state == .ended {
 			isLongPressActive = false
 			print("Long press ended")
+			
+			stopTypingNoise()
 			
 			// Get duration of long press
 			if let startTime = pressStartTime {
@@ -281,15 +325,32 @@ class NSGameScene: SKScene {
 		// Compare duration of long press with actual duration in song
 		let accuracy = abs(touchDuration - currentBeat.duration!)
 		
-		if accuracy <= 0.25 {
+		if accuracy <= 0.4 {
 			showFeedback(forAccuracy: "Perfect!")
 			context?.gameInfo.score += 10
 			scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+			
+			// Scale up after correct hold
+			if let shapeNode = beatToNodeMap[currentBeat.timestamp] {
+				let scaleUpAction = SKAction.scale(to: 1.35, duration: 0.1)
+				let scaleDownAction = SKAction.scale(to: 1.0, duration: 0.1)
+				let scaleSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+				shapeNode.run(scaleSequence)
+			}
+			
 			beatTimestamps.removeFirst() // Remove beat just checked
-		} else if accuracy <= 0.5{
+		} else if accuracy <= 0.75{
 			showFeedback(forAccuracy: "Good")
 			context?.gameInfo.score += 5
 			scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
+			
+			if let shapeNode = beatToNodeMap[currentBeat.timestamp] {
+				let scaleUpAction = SKAction.scale(to: 1.2, duration: 0.1)
+				let scaleDownAction = SKAction.scale(to: 1.0, duration: 0.1)
+				let scaleSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+				shapeNode.run(scaleSequence)
+			}
+			
 			beatTimestamps.removeFirst()
 		} else {
 			if let playingState = context?.stateMachine?.currentState as? NSPlayingState {
@@ -378,11 +439,15 @@ class NSGameScene: SKScene {
 		
 		// Add line and balls and begin audio
 		title.run(sequence) {
-//			if self.scoreNode != nil {
+			self.spawnBalls()
+			
+			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
+				playingState.playAudio(fileName: "Song")
+			}
+			
 			self.scoreNode.setup(in: self.frame)
 			self.scoreNode.updateScore(with: self.context?.gameInfo.score ?? 0)
 			self.addChild(self.scoreNode)
-//			}
 			
 			self.line = SKShapeNode()
 			let lineStartY = self.frame.height * (3.0 / 5.0)
@@ -394,13 +459,6 @@ class NSGameScene: SKScene {
 			self.line.fillColor = .red
 			self.line.strokeColor = .red
 			self.addChild(self.line)
-			
-			self.spawnBalls()
-		
-			if let playingState = self.context?.stateMachine?.currentState as? NSPlayingState {
-				playingState.playAudio(fileName: "Song")
-			}
-			
 		}
 	}
 	
@@ -451,55 +509,48 @@ class NSGameScene: SKScene {
 	
 	// Blue balls moving horizontally, passing the middle of the screen at each beat to tap to
 	func spawnBalls() {
-		for beat in adjustedBeatTimestamps {
+		for var beat in beatTimestamps {
 			// Create ball node and action
-			let ball = SKShapeNode(circleOfRadius: 15)
-			ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
-			self.addChild(ball)
-			
-			let adjustedDelay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
-			let adjustedDuration = 1.6 / context!.speedMultiplier
-			
-//			let delay = beat.timestamp - 0.8
-			
-			let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: TimeInterval(adjustedDuration))
-			
-			let waitAction = SKAction.wait(forDuration: adjustedDelay)
-			let sequence = SKAction.sequence([waitAction, moveAction])
 			if beat.type == "tap" {
+				let ball = SKShapeNode(circleOfRadius: 15)
 				ball.fillColor = .blue
-			} else {	//  If it is a "hold" beat, ball is red and "hold" is displayed for as long as user should hold for
-				ball.fillColor = .red
+				ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
+				self.addChild(ball)
+				beatToNodeMap[beat.timestamp] = ball
 				
-				let holdText = SKLabelNode()
-				holdText.position = CGPoint(x: self.size.width / 2, y: self.size.height * (3 / 10))
-				holdText.fontSize = 40
-				holdText.color = .white
-				holdText.text = "Hold"
-				holdText.fontName = "PPNeueMontreal-Book"
+				let delay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
+				let duration = 1.6 / context!.speedMultiplier
+							
+				let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: TimeInterval(duration))
 				
-				let adjustedTextDelay = beat.timestamp / Double(context!.speedMultiplier)
-				let waitToShowText = SKAction.wait(forDuration: adjustedTextDelay)
-				let addTextAction = SKAction.run {
-					self.addChild(holdText)
-				}
-
-				if let holdDuration = beat.duration {
-					let adjustedHoldDuration = holdDuration / Double(context!.speedMultiplier)
-					let removeTextDelay = SKAction.wait(forDuration: adjustedHoldDuration)
-					let removeTextAction = SKAction.run {
-						holdText.removeFromParent()
-					}
-					
-					let showAndRemoveSequence = SKAction.sequence([waitToShowText, addTextAction, removeTextDelay, removeTextAction])
-					self.run(showAndRemoveSequence)
+				let waitAction = SKAction.wait(forDuration: delay)
+				let sequence = SKAction.sequence([waitAction, moveAction])
+				ball.run(sequence)
+			} else {	//  If it is a "hold" beat
+				let barWidth = CGFloat(beat.duration!) * 200.0 / CGFloat(context!.speedMultiplier)
+				let barHeight: CGFloat = 30.0
+				
+				let bar = SKShapeNode(rectOf: CGSize(width: barWidth, height: barHeight), cornerRadius: 15)
+				bar.fillColor = .red
+				bar.position = CGPoint(x: self.frame.minX - barWidth / 2, y: self.frame.midY)
+				self.addChild(bar)
+				beatToNodeMap[beat.timestamp] = bar
+				
+				// Calculate delay and duration adjusted for speed
+				let delay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
+				let holdDuration = beat.duration! / Double(context!.speedMultiplier)
+				
+				let moveDistance = self.frame.width + barWidth
+				let moveDuration = (1.6 + holdDuration) / Double(context!.speedMultiplier)
+				
+				let moveAction = SKAction.moveBy(x: moveDistance, y: 0, duration: TimeInterval(moveDuration))
+				let waitAction = SKAction.wait(forDuration: delay)
+				let sequence = SKAction.sequence([waitAction, moveAction])
+				bar.run(sequence)
 				}
 			}
-			ball.run(sequence)
 		}
-	}
 
-	
 	func prepareGameContext() {
 		guard let context = context else { return }
 		
