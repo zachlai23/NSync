@@ -1,2 +1,1 @@
-Rhythm based iOS mobile game.
-hello
+# NSYNC - Rythym base iOS game
