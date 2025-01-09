@@ -1,7 +1,7 @@
 # NSYNC - Rhythm based iOS game
 
 ## Overview
-Rhythm-based iOS game where players tap or hold on the screen in sync with the beat of the music, guided by visual animations.  
+Rhythm-based iOS game where players tap or hold on the screen in sync with the beat of the music, guided by visual animations.  Code written in Swift, Frameworks used include SpriteKit, GameplayKit, and AVAUdioPlayer,  and artwork done in Figma.
 
 ## Features 
 <ul>
