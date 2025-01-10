@@ -42,7 +42,7 @@ class NSGameScene: SKScene {
 		var node: SKShapeNode?
 	}
 	
-	var beatToNodeMap: [Double: SKShapeNode] = [:]
+	var beatToNodeMap: [Double: SKSpriteNode] = [:]
 	
 	var beatTimestamps: [Beat] = []
 	var adjustedBeatTimestamps: [Beat] = []
@@ -75,7 +75,6 @@ class NSGameScene: SKScene {
 		
 		prepareGameContext()
 		
-		backgroundColor = .blue
 		context.stateMachine?.enter(NSStartState.self)
 		context.layoutInfo = NSLayoutInfo(screenSize: size)
 	}
@@ -147,12 +146,13 @@ class NSGameScene: SKScene {
 		}
 	}
 	
+	// Long typing noise while user holds
 	func startTypingNoise() {
 		guard let soundURL = Bundle.main.url(forResource: "longType3", withExtension: "mp3") else { return }
 		do {
 			typingNoisePlayer = try AVAudioPlayer(contentsOf: soundURL)
-			typingNoisePlayer?.numberOfLoops = -1  // Loop indefinitely while holding
-			typingNoisePlayer?.volume = 0.8  // Adjust volume to your preference
+			typingNoisePlayer?.numberOfLoops = -1
+			typingNoisePlayer?.volume = 0.8
 			typingNoisePlayer?.play()
 		} catch {
 			print("Error loading sound file: \(error)")
@@ -262,16 +262,10 @@ class NSGameScene: SKScene {
 		}
 	}
 	
-	//	// Check if user did not tap to a valid beat
-	//	func checkMissedBeat(currentTime: Double) {
-	//		if currentTime - lastBeat > 0.5 && lastBeat > lastTap {
-	//			print("Fail - Missed a beat at \(lastBeat) seconds.")
-	//			lastCheckedTime = currentTime
-	//		}
-	//	}
-	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
+		let location = touch.location(in: self)
+		let nodeAtPoint = atPoint(location)
 		// If tap in start state, move to playing state
 		if context?.stateMachine?.currentState is NSStartState {
 			backgroundColor = .gray
@@ -282,13 +276,13 @@ class NSGameScene: SKScene {
 			playingState.handleTap(touch)
 		} else if let gameOverState = context?.stateMachine?.currentState as? NSGameOverState {
 			// If play again button hit, restart game
-			if playAgainButtonNode.contains(touch.location(in: self)) {
-				restartGame()
-			}
+		if nodeAtPoint.name == "playAgainButton" {
+			restartGame()
+		}
 		}
 	}
 	
-	// Using long press gesture to detect "holds"
+	// Use long press gesture to detect "holds"
 	@objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
 		if gestureRecognizer.state == .began {
 			isLongPressActive = true
@@ -405,12 +399,12 @@ class NSGameScene: SKScene {
 		context?.stateMachine?.enter(NSPlayingState.self)
 	}
 	
-	// Start Screen - Gray screen with title
+	// Start Screen
 	func showStartScreen() {
-		let title = SKLabelNode(text: "NSync")
-		title.position = CGPoint(x: size.width / 2, y: size.height / 2)
-		title.fontName = "PPNeueMontreal-Bold"
-		addChild(title)
+		let titleArt = SKSpriteNode(imageNamed: "start")
+		titleArt.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		titleArt.size = CGSize(width: size.width, height: size.height)
+		addChild(titleArt)
 	}
 	
 	func showPlayingScreen() {
@@ -419,14 +413,34 @@ class NSGameScene: SKScene {
 				node.removeFromParent()
 			}
 		}
+		let playingBackground = SKSpriteNode(imageNamed: "playing_background")
+		playingBackground.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		playingBackground.size = CGSize(width: size.width, height: size.height)
+		addChild(playingBackground)
+		
+		
+		// Left and right border that display over keys
+		let leftBorder = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 100))
+		leftBorder.position = CGPoint(x: self.frame.minX + 5, y: self.frame.midY)
+		leftBorder.zPosition = 100
+		leftBorder.color = SKColor(red: 0.196, green: 0.192, blue: 0.192, alpha: 1.0)
+		self.addChild(leftBorder)
+
+		let rightBorder = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 100))
+		rightBorder.position = CGPoint(x: self.frame.maxX - 5, y: self.frame.midY)
+		rightBorder.zPosition = 100
+		rightBorder.color = SKColor(red: 0.196, green: 0.192, blue: 0.192, alpha: 1.0)
+		self.addChild(rightBorder)
 		
 		// Show instructions for 1 second
 		let title = SKLabelNode(text: "Tap to the beat.")
 		title.name = "title"
-		title.position = CGPoint(x: size.width / 2, y: size.height * (2.0 / 3))
+		title.fontSize = 55
+		title.position = CGPoint(x: size.width / 2, y: size.height * (3.0 / 5))
+		title.fontName = "Jersey25-Regular"
 		addChild(title)
 		
-		backgroundColor = .gray
+
 		
 		let waitAction = SKAction.wait(forDuration: 1.0)
 		let fadeOutAction = SKAction.fadeOut(withDuration: 1.0)
@@ -448,17 +462,6 @@ class NSGameScene: SKScene {
 			self.scoreNode.setup(in: self.frame)
 			self.scoreNode.updateScore(with: self.context?.gameInfo.score ?? 0)
 			self.addChild(self.scoreNode)
-			
-			self.line = SKShapeNode()
-			let lineStartY = self.frame.height * (3.0 / 5.0)
-			let linePath = CGMutablePath()
-			linePath.move(to: CGPoint(x: self.frame.midX, y: lineStartY))
-			linePath.addLine(to: CGPoint(x: self.frame.midX, y: 0))
-			
-			self.line.path = linePath
-			self.line.fillColor = .red
-			self.line.strokeColor = .red
-			self.addChild(self.line)
 		}
 	}
 	
@@ -466,18 +469,21 @@ class NSGameScene: SKScene {
 	func showGameOverScreen() {
 		removeAllActions()
 		removeAllChildren()
-		backgroundColor = .red
-		let title = SKLabelNode(text: "Game Over")
-		title.fontName = "PPNeueMontreal-Bold"
-		title.position = CGPoint(x: size.width / 2, y: size.height * (2 / 3))
-		addChild(title)
+		
+		let gameOverBackground = SKSpriteNode(imageNamed: "game_over")
+		gameOverBackground.position = CGPoint(x: size.width / 2, y: size.height / 2)
+		gameOverBackground.size = CGSize(width: size.width, height: size.height)
+		addChild(gameOverBackground)
 		
 		scoreNode.updateScore(with: context?.gameInfo.score ?? 0)
 		scoreNode.position = CGPoint(x: size.width / 2, y: size.height * (3 / 5))
 		addChild(scoreNode)
 		
-		playAgainButtonNode.setup(screenSize: size)
-		addChild(playAgainButtonNode)
+		let playAgainButton = SKSpriteNode(imageNamed: "play_again_button")
+		playAgainButton.position = CGPoint(x: size.width / 2, y: size.height * 0.3)
+		playAgainButton.name = "playAgainButton"
+		playAgainButton.size = CGSize(width: 200, height: 50)
+		addChild(playAgainButton)
 	}
 	
 	// Output feedback based on accuracy of tap
@@ -485,7 +491,7 @@ class NSGameScene: SKScene {
 		feedbackLabel = SKLabelNode()
 		feedbackLabel.position = CGPoint(x: self.size.width / 2, y: self.size.height * (7 / 10))
 		feedbackLabel.fontSize = 40
-		feedbackLabel.fontName = "PPNeueMontreal-Book"
+		feedbackLabel.fontName = "Jersey25-Regular"
 		if (accuracy == "Perfect!") {
 			feedbackLabel.fontColor = .green
 		}
@@ -509,40 +515,49 @@ class NSGameScene: SKScene {
 	
 	// Blue balls moving horizontally, passing the middle of the screen at each beat to tap to
 	func spawnBalls() {
+		let keySequence = ["N", "S", "Y", "N", "C"]
+		var keyIndex = 0
 		for var beat in beatTimestamps {
-			// Create ball node and action
+			let key = keySequence[keyIndex % keySequence.count]
+
 			if beat.type == "tap" {
-				let ball = SKShapeNode(circleOfRadius: 15)
-				ball.fillColor = .blue
-				ball.position = CGPoint(x: self.frame.minX - 15, y: self.frame.midY)
+				let ball = SKSpriteNode(imageNamed: "key_\(key)")
+				ball.position = CGPoint(x: self.frame.minX - 30, y: self.frame.midY)
+				ball.zPosition = 10
 				self.addChild(ball)
 				beatToNodeMap[beat.timestamp] = ball
 				
 				let delay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
 				let duration = 1.6 / context!.speedMultiplier
 							
-				let moveAction = SKAction.moveTo(x: self.frame.maxX + 15, duration: TimeInterval(duration))
+				let moveAction = SKAction.moveTo(x: self.frame.maxX + 30, duration: TimeInterval(duration))
 				
 				let waitAction = SKAction.wait(forDuration: delay)
 				let sequence = SKAction.sequence([waitAction, moveAction])
 				ball.run(sequence)
-			} else {	//  If it is a "hold" beat
-				let barWidth = CGFloat(beat.duration!) * 200.0 / CGFloat(context!.speedMultiplier)
-				let barHeight: CGFloat = 30.0
 				
-				let bar = SKShapeNode(rectOf: CGSize(width: barWidth, height: barHeight), cornerRadius: 15)
-				bar.fillColor = .red
-				bar.position = CGPoint(x: self.frame.minX - barWidth / 2, y: self.frame.midY)
+				keyIndex += 1
+			} else {	// If beat requires a hold
+				let baseWidth: CGFloat = 248.0
+				let barHeight: CGFloat = 47.0
+
+				// Scale bar width based on the duration of hold
+				let bar = SKSpriteNode(imageNamed: "hold_bar")
+				let scaleFactor = CGFloat(beat.duration!) / 1.0
+				bar.size = CGSize(width: baseWidth*scaleFactor, height: barHeight)
+
+
+				bar.position = CGPoint(x: self.frame.minX - (baseWidth * scaleFactor) / 2 - 50, y: self.frame.midY)
 				self.addChild(bar)
 				beatToNodeMap[beat.timestamp] = bar
-				
-				// Calculate delay and duration adjusted for speed
+
 				let delay = (beat.timestamp - 0.8) / Double(context!.speedMultiplier)
 				let holdDuration = beat.duration! / Double(context!.speedMultiplier)
-				
-				let moveDistance = self.frame.width + barWidth
+
+				let moveDistance = self.frame.width + (baseWidth * scaleFactor) + 50
 				let moveDuration = (1.6 + holdDuration) / Double(context!.speedMultiplier)
-				
+
+				// Move bar across the screen
 				let moveAction = SKAction.moveBy(x: moveDistance, y: 0, duration: TimeInterval(moveDuration))
 				let waitAction = SKAction.wait(forDuration: delay)
 				let sequence = SKAction.sequence([waitAction, moveAction])

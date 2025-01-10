@@ -27,14 +27,8 @@
 		EFC914C82CC8810F001CAA28 /* GameModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C52CC8810F001CAA28 /* GameModeType.swift */; };
 		EFC914C92CC8810F001CAA28 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C62CC8810F001CAA28 /* GameType.swift */; };
 		EFC914CA2CC8810F001CAA28 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC914C32CC8810F001CAA28 /* Dependencies.swift */; };
+		EFD408892D249A3600B16199 /* Jersey25-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFD408882D249A3600B16199 /* Jersey25-Regular.otf */; };
 		EFDFE6772CE947980053F123 /* NSyncTapHold.csv in Resources */ = {isa = PBXBuildFile; fileRef = EFDFE6762CE947980053F123 /* NSyncTapHold.csv */; };
-		EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */; };
-		EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */; };
-		EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */; };
-		EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */; };
-		EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */; };
-		EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */; };
-		EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */; };
 		EFEA85972CDC34A9003D70AE /* NSPlayAgainButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */; };
 		EFED21392CEAE67300876F08 /* Song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EFED21382CEAE67300876F08 /* Song.mp3 */; };
 /* End PBXBuildFile section */
@@ -76,21 +70,28 @@
 		EFC914C42CC8810F001CAA28 /* GameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		EFC914C52CC8810F001CAA28 /* GameModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeType.swift; sourceTree = "<group>"; };
 		EFC914C62CC8810F001CAA28 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
+		EFD408882D249A3600B16199 /* Jersey25-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jersey25-Regular.otf"; sourceTree = "<group>"; };
 		EFDFE6762CE947980053F123 /* NSyncTapHold.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = NSyncTapHold.csv; sourceTree = "<group>"; };
-		EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Bold.otf"; sourceTree = "<group>"; };
-		EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Book.otf"; sourceTree = "<group>"; };
-		EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Italic.otf"; sourceTree = "<group>"; };
-		EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Medium.otf"; sourceTree = "<group>"; };
-		EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBold.ttf"; sourceTree = "<group>"; };
-		EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-SemiBolditalic.otf"; sourceTree = "<group>"; };
-		EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPNeueMontreal-Thin.otf"; sourceTree = "<group>"; };
 		EFEA85962CDC34A9003D70AE /* NSPlayAgainButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPlayAgainButtonNode.swift; sourceTree = "<group>"; };
 		EFED21382CEAE67300876F08 /* Song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Song.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EFD408932D24A04800B16199 /* Exceptions for "NSync" folder in "NSync" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EFC914952CC87868001CAA28 /* NSync */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EFC914982CC87868001CAA28 /* NSync */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EFD408932D24A04800B16199 /* Exceptions for "NSync" folder in "NSync" target */,
+			);
 			path = NSync;
 			sourceTree = "<group>";
 		};
@@ -155,13 +156,6 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
-		EF83D2C52CC9D10200ED75BF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		EF83D2C62CC9D10800ED75BF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				EF83D2C62CC9D10800ED75BF /* Helpers */,
-				EF83D2C52CC9D10200ED75BF /* Models */,
 				EF83D2C42CC9D0FA00ED75BF /* Nodes */,
 				EF83D2C32CC9D0F400ED75BF /* States */,
 				EF83D2CB2CC9D1BF00ED75BF /* NSGameContext.swift */,
@@ -242,13 +235,7 @@
 		EFE554622CDADB5A00404F6B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				EFE554632CDADB6B00404F6B /* PPNeueMontreal-Bold.otf */,
-				EFE5546F2CDADB8E00404F6B /* PPNeueMontreal-Thin.otf */,
-				EFE5546B2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf */,
-				EFE5546D2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf */,
-				EFE554652CDADB7600404F6B /* PPNeueMontreal-Book.otf */,
-				EFE554672CDADB7C00404F6B /* PPNeueMontreal-Italic.otf */,
-				EFE554692CDADB8100404F6B /* PPNeueMontreal-Medium.otf */,
+				EFD408882D249A3600B16199 /* Jersey25-Regular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -383,17 +370,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF37E2322CEB3FCE00FB2747 /* longType3.mp3 in Resources */,
-				EFE5546A2CDADB8100404F6B /* PPNeueMontreal-Medium.otf in Resources */,
-				EFE554702CDADB8E00404F6B /* PPNeueMontreal-Thin.otf in Resources */,
-				EFE5546C2CDADB8500404F6B /* PPNeueMontreal-SemiBold.ttf in Resources */,
-				EFE554642CDADB6B00404F6B /* PPNeueMontreal-Bold.otf in Resources */,
-				EFE554682CDADB7C00404F6B /* PPNeueMontreal-Italic.otf in Resources */,
 				EFDFE6772CE947980053F123 /* NSyncTapHold.csv in Resources */,
-				EFE554662CDADB7600404F6B /* PPNeueMontreal-Book.otf in Resources */,
 				EFED21392CEAE67300876F08 /* Song.mp3 in Resources */,
 				EFC9149E2CC87869001CAA28 /* Assets.xcassets in Resources */,
 				EF37E2342CEB40CA00FB2747 /* keyboardClick3.mp3 in Resources */,
-				EFE5546E2CDADB8900404F6B /* PPNeueMontreal-SemiBolditalic.otf in Resources */,
+				EFD408892D249A3600B16199 /* Jersey25-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -574,6 +556,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -594,6 +577,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NSync/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NSync/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -622,6 +606,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NSync/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NSync/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

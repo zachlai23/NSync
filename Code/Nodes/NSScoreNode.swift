@@ -14,7 +14,8 @@ class NSScoreNode: SKNode {
 		removeAllChildren()
 		position = CGPoint(x: frame.midX, y: frame.maxY - (frame.height * 0.2))
 	    updateScore(with: 0)
-		textNode.fontName = "PPNeueMontreal-Bold"
+		textNode.fontSize = 80
+		textNode.fontName = "Jersey25-Regular"
 	    addChild(textNode)
 	}
 

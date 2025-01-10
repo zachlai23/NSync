@@ -14,8 +14,8 @@ class NSDoublePointsNode: SKNode {
 		position = CGPoint(x: frame.size.width / 2, y: frame.size.height * (9 / 10))
 		textNode.fontSize = 40
 		textNode.fontColor = .white
-		textNode.fontName = "PPNeueMontreal-Bold"
-		textNode.text = "DOUBLE POINTS!!!"
+		textNode.fontName = "Jersey25-Regular"
+		textNode.text = "DOUBLE POINTS!"
 		addChild(textNode)
 	}
 
