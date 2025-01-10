@@ -10,3 +10,5 @@ NSYNC is a rhythm-based iOS game where players tap or hold on the screen in sync
 - **Double Points Power Up**: A double points period is triggered when the player achieves a certain number of perfect taps in a row after playing for at least 40 seconds. The number of perfect taps required increases with each double points period.
 
 ## Video
+https://github.com/user-attachments/assets/c63815da-e03a-4cac-8a65-33f4137f9785
+
